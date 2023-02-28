@@ -1,0 +1,75 @@
+﻿@inject IAuthService AuthService
+@inject Radzen.DialogService DialogService
+@inject NavigationManager NavigationManager
+
+<EditForm Model="user" OnValidSubmit="HandleRegistraion">
+    <DataAnnotationsValidator />
+    <MudItem xs="12" sm="10">
+        <MudCardContent>
+            <MudTextField Label="First Name"
+                          @bind-Value="user.FirstName" For="@(() => user.FirstName)" />
+            <MudTextField Label="Last Name"
+                          @bind-Value="user.LastName" For="@(() => user.LastName)" />
+            <MudTextField Label="Email" Class="mt-3"
+                          @bind-Value="user.Email" For="@(() => user.Email)" />
+            <MudDatePicker Label="Start Date" Class="mt-3"
+                           @bind-Date="user.StartWorkDate" For="@(() => user.StartWorkDate)" />
+            <MudTextField Label="Password" Class="mt-5"
+                          @bind-Value="user.Password" For="@(() => user.Password)" InputType="InputType.Password" />
+            <MudTextField Label="Password" Class="mt-3"
+                          @bind-Value="user.ConfirmPassword" For="@(() => user.ConfirmPassword)" InputType="InputType.Password" />
+        </MudCardContent>
+        <br/>
+        <MudCardActions>
+            <MudButton Variant="MudBlazor.Variant.Outlined" Color="Color.Primary" Class="ml-auto"  ButtonType="MudBlazor.ButtonType.Submit">Register</MudButton>
+        </MudCardActions>
+    </MudItem>
+</EditForm>
+
+@code {
+    DateTime? date = DateTime.Today;
+    UserRegister user = new();
+
+    async Task ShowBusyDialog(string message)
+    {
+        await BusyDialog(message);
+    }
+
+    async Task BusyDialog(string message)
+    {
+        await DialogService.OpenAsync("", ds =>
+        {
+            RenderFragment content = b =>
+            {
+                b.OpenElement(0, "div");
+                b.AddAttribute(1, "class", "row");
+
+                b.OpenElement(2, "div");
+                b.AddAttribute(3, "class", "col-md-12");
+
+                b.AddContent(4, message);
+
+                b.CloseElement();
+                b.CloseElement();
+            };
+            return content;
+        }, new Radzen.DialogOptions() { ShowTitle = false, Style = "min-height:auto;min-width:auto;width:auto", CloseDialogOnEsc = false });
+    }
+
+    private async Task HandleRegistraion()
+    {
+        ShowBusyDialog("Register...");
+
+        var result = await AuthService.Register(user);
+
+        await DialogService.Alert(result.Message, "Calyx", new AlertOptions() { OkButtonText = "Yes" });
+
+        DialogService.Close();
+
+        if (result.Success)
+        {
+            DialogService.Close();
+        }
+
+    }
+}
