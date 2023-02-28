@@ -1,0 +1,41 @@
+﻿@page "/pto"
+@attribute [Authorize(Roles = "Admin")]
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IAuthService AuthService
+@implements IDisposable
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@AuthService.Users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="User" Property="Id" Filterable="false" Title="ID" Frozen="true" Width="60px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="User" Title="Photo" Frozen="true" Sortable="false" Filterable="false" Width="80px" TextAlign="TextAlign.Center">
+            <Template Context="data">
+                <RadzenImage Path="/images/logo.png" class="rz-gravatar" />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="User" Property="Name" Title="Full Name" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" Width="200px" />
+        <RadzenDataGridColumn TItem="User" Property="FirstName" Title="First Name" Width="120px" />
+        <RadzenDataGridColumn TItem="User" Property="LastName" Title="Last Name" Width="120px" />
+        <RadzenDataGridColumn TItem="User" Property="StartWorkDate" Title="Start Date" FormatString="{0:d}" Width="160px" />
+        <RadzenDataGridColumn TItem="User" Property="PhoneNumber" Title="Phone" Width="160px" />
+        <RadzenDataGridColumn TItem="User" Property="Role" Title="Role" Width="100px" />
+    </Columns>
+</RadzenDataGrid>
+
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await AuthService.GetUsers();
+
+        AuthService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AuthService.OnChange -= StateHasChanged;
+    }
+}

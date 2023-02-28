@@ -11,6 +11,10 @@
             _authStateProvider = authStateProvider;
         }
 
+        public List<User> Users { get; set; } = new List<User>();
+
+        public event Action OnChange;
+
         public async Task<ServiceResponse<int>> Register(UserRegister request)
         {
             var result = await _http.PostAsJsonAsync("api/auth/register", request);
@@ -35,6 +39,14 @@
             var response = await _http.GetFromJsonAsync<ServiceResponse<User>>("api/auth/get-user");
 
             return response.Data;
+        }
+        public async Task GetUsers()
+        {
+            var response = await _http.GetFromJsonAsync<ServiceResponse<List<User>>>("api/auth/get-users");
+
+            if (response.Success)
+                Users = response.Data;
+
         }
 
         public async Task<ServiceResponse<bool>> UpdateProfile(UpdateProfile request)

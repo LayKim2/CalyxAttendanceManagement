@@ -73,6 +73,9 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
+            if (user.Email == "wayne_kim@calyxsoftware.com")
+                user.Role = "Admin";
+
             _context.Users.Add(user);
 
             await _context.SaveChangesAsync();
@@ -119,7 +122,7 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
-                //new Claim(ClaimTypes.Role, user.Role) // TODO -- token role
+                new Claim(ClaimTypes.Role, user.Role) // TODO -- token role
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
@@ -191,6 +194,29 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
             return new ServiceResponse<User> { Data = user };
         }
 
+        public async Task<ServiceResponse<List<User>>> GetUsers()
+        {
+            var id = GetUserId();
+            var email = GetUserEmail();
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email) && u.Id.Equals(id));
+
+            if(user != null && user.Role == "Admin")
+            {
+                var users = await _context.Users.ToListAsync();
+
+                return new ServiceResponse<List<User>> { Data = users };
+
+            } else
+            {
+                return new ServiceResponse<List<User>>
+                {
+                    Success = false,
+                    Message = "Sorry. This data only can see admin.",
+                };
+            }
+        }
+
         public async Task<ServiceResponse<bool>> UpdateProfile(int userId, UpdateProfile profile)
         {
             var email = GetUserEmail();
@@ -237,5 +263,6 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
             return new ServiceResponse<bool> { Data = true, Message = "Password has been changed." };
         }
+
     }
 }

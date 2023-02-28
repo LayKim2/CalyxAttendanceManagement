@@ -36,7 +36,12 @@
             </MudAppBar>
             <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always" Style="width:200px;">
                  <MudNavMenu>
-                <MudNavLink Class="nav-link" Style="color:#616161;" Href="/home" Icon="@Icons.Material.Outlined.Home">Home</MudNavLink>
+                    <MudNavLink Class="nav-link" Style="color:#616161;" Href="/home" Icon="@Icons.Material.Outlined.Home">Home</MudNavLink>
+                    @if (role == "Admin")
+                    {
+                        <MudNavLink Class="nav-link" Style="color:#616161;" Href="/admin/pto" Icon="@Icons.Material.Outlined.Schedule">PTO (Admin)</MudNavLink>
+                    }
+                    
                 </MudNavMenu>
             </MudDrawer>
             <MudMainContent>
@@ -56,6 +61,7 @@
 @code {
     bool _drawerOpen = true;
     string userName = string.Empty;
+    string role = string.Empty;
     bool isAuthenticated = false;
 
     protected override async Task OnInitializedAsync()
@@ -71,6 +77,9 @@
         {
             userName = (await AuthStateProvider.GetAuthenticationStateAsync())
             .User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+
+            role = (await AuthStateProvider.GetAuthenticationStateAsync())
+            .User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
         } else
         {
             NavigationManager.NavigateTo("login");

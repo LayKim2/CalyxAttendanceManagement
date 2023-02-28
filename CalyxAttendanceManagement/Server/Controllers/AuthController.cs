@@ -74,6 +74,12 @@ namespace CalyxAttendanceManagement.Server.Controllers
             return await _authService.GetUser();
         }
 
+        [HttpGet("get-users"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<User>>>> GetUsers()
+        {
+            return await _authService.GetUsers();
+        }
+
         [HttpPost("update-profile"), Authorize]
         public async Task<ActionResult<ServiceResponse<bool>>> UpdateProfile([FromBody] UpdateProfile profile)
         {

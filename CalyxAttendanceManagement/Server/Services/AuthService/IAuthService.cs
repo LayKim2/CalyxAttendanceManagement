@@ -10,6 +10,7 @@ public interface IAuthService
     string GetUserEmail();
     Task<User> GetUserByEmail(string email);
     Task<ServiceResponse<User>> GetUser();
+    Task<ServiceResponse<List<User>>> GetUsers();
     Task<ServiceResponse<bool>> UpdateProfile(int userId, UpdateProfile profile);
     Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword);
 
