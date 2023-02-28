@@ -8,4 +8,6 @@ public class DataContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<UserPTO> UserPTO { get; set; }
+    public DbSet<UserPTOHistory> UserPTOHistory { get; set; }
 }

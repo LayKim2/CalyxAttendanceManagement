@@ -12,6 +12,11 @@
                           @bind-Value="user.LastName" For="@(() => user.LastName)" />
             <MudTextField Label="Email" Class="mt-3"
                           @bind-Value="user.Email" For="@(() => user.Email)" />
+            <MudSelect Margin="Margin.Dense" T="string" @bind-Value="user.Belong" Label="Belong" AnchorOrigin="Origin.BottomCenter">
+                <MudSelectItem Value="@("Zip")" />
+                <MudSelectItem Value="@("Path")" />
+                <MudSelectItem Value="@("QA")" />
+            </MudSelect>
             <MudDatePicker Label="Start Date" Class="mt-3"
                            @bind-Date="user.StartWorkDate" For="@(() => user.StartWorkDate)" />
             <MudTextField Label="Password" Class="mt-5"

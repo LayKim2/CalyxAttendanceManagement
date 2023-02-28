@@ -4,22 +4,36 @@
 @inject IAuthService AuthService
 @implements IDisposable
 
-<RadzenDataGrid AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="2" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center"
                 Data="@AuthService.Users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
     <Columns>
-        <RadzenDataGridColumn TItem="User" Property="Id" Filterable="false" Title="ID" Frozen="true" Width="60px" TextAlign="TextAlign.Center" />
-        <RadzenDataGridColumn TItem="User" Title="Photo" Frozen="true" Sortable="false" Filterable="false" Width="80px" TextAlign="TextAlign.Center">
-            <Template Context="data">
-                <RadzenImage Path="/images/logo.png" class="rz-gravatar" />
+        <RadzenDataGridColumn TItem="User" Property="Id" Filterable="false" Title="#" Frozen="true" Width="60px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="User" Property="Name" Title="Employee" Frozen="true" Sortable="false" Filterable="false" Width="120px" TextAlign="TextAlign.Center">
+            <Template Context="user">
+                <RadzenImage Path="/images/logo.png" style="width: 40px; height: 40px; border-radius: 8px; margin-right: 8px; float: left;" />
+                <RadzenText TextStyle="TextStyle.Subtitle2" class="mb-0">@user.Name</RadzenText>
+                <RadzenText TextStyle="TextStyle.Caption">@user.Belong</RadzenText>
             </Template>
         </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="User" Property="Name" Title="Full Name" Frozen="true" Width="160px" />
-        <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" Width="200px" />
-        <RadzenDataGridColumn TItem="User" Property="FirstName" Title="First Name" Width="120px" />
-        <RadzenDataGridColumn TItem="User" Property="LastName" Title="Last Name" Width="120px" />
+        <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" Width="180px" />
         <RadzenDataGridColumn TItem="User" Property="StartWorkDate" Title="Start Date" FormatString="{0:d}" Width="160px" />
         <RadzenDataGridColumn TItem="User" Property="PhoneNumber" Title="Phone" Width="160px" />
+        <RadzenDataGridColumn TItem="User" Property="IsAuthenticated" Title="Verified Email" Width="140px">
+            <Template Context="user">
+                <RadzenText Text="@(user.IsAuthenticated == true ? "Yes" : "No")"></RadzenText>
+            </Template>
+        </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="User" Property="Role" Title="Role" Width="100px" />
+        <RadzenDataGridColumn TItem="User" Property="UserPTO.Pto" Title="PTO" Width="80px">
+            <Template Context="user">
+                <RadzenText>@user.UserPTO.Pto</RadzenText>
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="User" Property="" Title="Apply" Width="160px" Filterable="false" TextAlign="TextAlign.Center">
+            <Template Context="data">
+                <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Radzen.Variant.Flat" Shade="Shade.Lighter" Icon="info" Text="Update" />
+            </Template>
+        </RadzenDataGridColumn>
     </Columns>
 </RadzenDataGrid>
 

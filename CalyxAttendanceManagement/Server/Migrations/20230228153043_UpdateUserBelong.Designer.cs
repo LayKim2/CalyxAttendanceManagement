@@ -4,6 +4,7 @@ using CalyxAttendanceManagement.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CalyxAttendanceManagement.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230228153043_UpdateUserBelong")]
+    partial class UpdateUserBelong
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,16 +93,13 @@ namespace CalyxAttendanceManagement.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal>("Pto")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Pto")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("UserPTO");
                 });
@@ -139,21 +138,6 @@ namespace CalyxAttendanceManagement.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserPTOHistory");
-                });
-
-            modelBuilder.Entity("CalyxAttendanceManagement.Shared.Model.UserPTO", b =>
-                {
-                    b.HasOne("CalyxAttendanceManagement.Shared.Model.User", null)
-                        .WithOne("UserPTO")
-                        .HasForeignKey("CalyxAttendanceManagement.Shared.Model.UserPTO", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CalyxAttendanceManagement.Shared.Model.User", b =>
-                {
-                    b.Navigation("UserPTO")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

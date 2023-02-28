@@ -12,6 +12,8 @@ public class UserRegister
     [Required]
     public string LastName { get; set; } = string.Empty;
     [Required]
+    public string Belong { get; set; } = string.Empty;
+    [Required]
     public DateTime? StartWorkDate { get; set; } = DateTime.Now;
 
     [Required, StringLength(50, MinimumLength = 6)]

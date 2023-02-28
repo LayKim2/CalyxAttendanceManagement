@@ -203,7 +203,7 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
             if(user != null && user.Role == "Admin")
             {
-                var users = await _context.Users.ToListAsync();
+                var users = await _context.Users.Include(u => u.UserPTO).ToListAsync();
 
                 return new ServiceResponse<List<User>> { Data = users };
 

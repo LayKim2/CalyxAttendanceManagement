@@ -27,7 +27,8 @@ namespace CalyxAttendanceManagement.Server.Controllers
                     FirstName = request.FirstName,
                     LastName = request.LastName,
                     Email = request.Email,
-                    StartWorkDate = request.StartWorkDate?? DateTime.Now,
+                    Belong = request.Belong,
+                    StartWorkDate = request.StartWorkDate?? DateTime.Now
                 },
                 request.Password
             );

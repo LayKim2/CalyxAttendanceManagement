@@ -9,6 +9,7 @@ public class User
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
+    public string Belong { get; set; } = string.Empty;
     public DateTime StartWorkDate { get; set; } = DateTime.Now;
     public string PhoneNumber { get; set; } = string.Empty;
     public byte[] PasswordHash { get; set; }
@@ -17,4 +18,5 @@ public class User
     public DateTime DateUpdated{ get; set; } = DateTime.Now;
     public bool IsAuthenticated { get; set; } = false;
     public string Role { get; set; } = "Employee";
+    public UserPTO UserPTO { get; set; }
 }
