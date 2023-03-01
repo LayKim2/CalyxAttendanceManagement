@@ -4,6 +4,7 @@ using CalyxAttendanceManagement.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CalyxAttendanceManagement.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230228175859_UpdatePTOHistory")]
+    partial class UpdatePTOHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,32 +115,12 @@ namespace CalyxAttendanceManagement.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal>("Before")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Comment")
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Count")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("CountType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Current")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PTOType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedTime")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("TypeCD")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -146,13 +128,23 @@ namespace CalyxAttendanceManagement.Server.Migrations
                     b.Property<int>("UserPTOId")
                         .HasColumnType("int");
 
-                    b.Property<string>("VerifiedType")
+                    b.Property<int>("after")
+                        .HasColumnType("int");
+
+                    b.Property<int>("before")
+                        .HasColumnType("int");
+
+                    b.Property<string>("comment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("total")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("UserPTOId");
+                    b.HasIndex("UserPTOId")
+                        .IsUnique();
 
                     b.ToTable("UserPTOHistory");
                 });
@@ -169,8 +161,8 @@ namespace CalyxAttendanceManagement.Server.Migrations
             modelBuilder.Entity("CalyxAttendanceManagement.Shared.Model.UserPTOHistory", b =>
                 {
                     b.HasOne("CalyxAttendanceManagement.Shared.Model.UserPTO", null)
-                        .WithMany("UserPtoHistory")
-                        .HasForeignKey("UserPTOId")
+                        .WithOne("UserPtoHistory")
+                        .HasForeignKey("CalyxAttendanceManagement.Shared.Model.UserPTOHistory", "UserPTOId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -183,7 +175,8 @@ namespace CalyxAttendanceManagement.Server.Migrations
 
             modelBuilder.Entity("CalyxAttendanceManagement.Shared.Model.UserPTO", b =>
                 {
-                    b.Navigation("UserPtoHistory");
+                    b.Navigation("UserPtoHistory")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

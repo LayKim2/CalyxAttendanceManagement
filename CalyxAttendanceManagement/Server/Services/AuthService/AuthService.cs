@@ -201,19 +201,28 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email) && u.Id.Equals(id));
 
-            if(user != null && user.Role == "Admin")
+            if( user == null)
             {
-                var users = await _context.Users.Include(u => u.UserPTO).ToListAsync();
-
-                return new ServiceResponse<List<User>> { Data = users };
-
-            } else
+                return new ServiceResponse<List<User>>
+                {
+                    Success = false,
+                    Message = "Sorry, but user does not exist.",
+                };
+            } else if (!_httpContextAccessor.HttpContext.User.IsInRole("Admin") || user.Role != "Admin")
             {
                 return new ServiceResponse<List<User>>
                 {
                     Success = false,
                     Message = "Sorry. This data only can see admin.",
                 };
+            } else
+            {
+                var users = await _context.Users
+                                .Include(u => u.UserPTO)
+                                .ThenInclude(p => p.UserPtoHistory)
+                                .ToListAsync();
+
+                return new ServiceResponse<List<User>> { Data = users };
             }
         }
 
