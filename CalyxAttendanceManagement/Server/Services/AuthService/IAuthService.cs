@@ -14,4 +14,5 @@ public interface IAuthService
     Task<ServiceResponse<bool>> UpdateProfile(int userId, UpdateProfile profile);
     Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword);
     Task<ServiceResponse<List<VerifyUserPTO>>> GetVerifyPTO();
+    Task<ServiceResponse<bool>> UpdateVerifyPTO(int historyId, bool result);
 }

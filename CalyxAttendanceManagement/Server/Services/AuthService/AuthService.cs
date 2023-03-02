@@ -303,5 +303,76 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
             return new ServiceResponse<bool> { Data = true, Message = "Password has been changed." };
         }
 
+        public async Task<ServiceResponse<bool>> UpdateVerifyPTO(int historyId, bool result)
+        {
+            var id = GetUserId();
+            var email = GetUserEmail();
+
+            var adminUser = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email) && u.Id.Equals(id));
+
+            if (adminUser == null)
+            {
+                return new ServiceResponse<bool>
+                {
+                    Success = false,
+                    Message = "Sorry, but user does not exist. please login again.",
+                };
+            }
+            else if (!_httpContextAccessor.HttpContext.User.IsInRole("Admin") || adminUser.Role != "Admin")
+            {
+                return new ServiceResponse<bool>
+                {
+                    Success = false,
+                    Message = "Sorry. This data only can be updated by admin.",
+                };
+            }
+            else
+            {
+                var UserPTOHistory = await _context.UserPTOHistory.Where(u => u.Id == historyId).FirstOrDefaultAsync();
+
+                if (UserPTOHistory == null)
+                {
+                    return new ServiceResponse<bool>
+                    {
+                        Success = false,
+                        Message = "Sorry. This data does not exist.",
+                    };
+                } else
+                {
+                    var userId = UserPTOHistory.UserId;
+
+                    var userPto = await _context.UserPTO.Where(up => up.UserId == UserPTOHistory.UserId && up.Id == UserPTOHistory.UserPTOId).FirstOrDefaultAsync();
+
+                    if(userPto == null) {
+                        return new ServiceResponse<bool>
+                        {
+                            Success = false,
+                            Message = "Sorry. This data does not exist.",
+                        };
+                    } else
+                    {
+                        if (result)
+                        {
+                            userPto.Pto = userPto.Pto - UserPTOHistory.Count;
+
+                            UserPTOHistory.VerifiedType = "Accepted";
+                            UserPTOHistory.UpdatedTime = DateTime.Now;
+                        } else
+                        {
+                            UserPTOHistory.VerifiedType = "Rejected";
+                            UserPTOHistory.UpdatedTime = DateTime.Now;
+                        }
+
+                        await _context.SaveChangesAsync();
+
+                        return new ServiceResponse<bool>
+                        {
+                            Success = true,
+                            Message = "Data saved.",
+                        };
+                    }
+                }
+            }
+        }
     }
 }

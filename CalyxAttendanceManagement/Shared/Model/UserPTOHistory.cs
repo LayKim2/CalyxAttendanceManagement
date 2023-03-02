@@ -7,7 +7,6 @@ public class UserPTOHistory
 {
     public int Id { get; set; }
 
-    [ForeignKey("UserPTO")]
     public int UserPTOId { get; set; }
 
     [ForeignKey("User")]

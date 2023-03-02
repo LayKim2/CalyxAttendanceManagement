@@ -66,6 +66,11 @@
 
     async Task UpdatePTOStatus(int historyId, bool isAccept)
     {
-        
+        updateUserPTO.UserPTOHistoryId = historyId;
+        updateUserPTO.Result = isAccept;
+
+        await AuthService.UpdateVerifyPTO(updateUserPTO);
+
+        updateUserPTO = new UpdateUserPTO();
     }
 }

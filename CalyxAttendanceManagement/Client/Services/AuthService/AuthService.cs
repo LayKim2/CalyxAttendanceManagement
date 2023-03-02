@@ -68,25 +68,18 @@
         {
             var response = await _http.GetFromJsonAsync<ServiceResponse<List<VerifyUserPTO>>>("api/auth/get-verify-pto");
 
-            if (response.Success)
+            if (response != null && response.Data != null)
                 VerifyUserPTOs = response.Data;
-
         }
 
-        //public UpdateUserPTO CreateNewCategory()
-        //{
-        //    var newCategory = new Category()
-        //    {
-        //        IsNew = true,
-        //        Editing = true
-        //    };
+        public async Task UpdateVerifyPTO(UpdateUserPTO request)
+        {
+            var response = await _http.PostAsJsonAsync("api/auth/update-verify-pto", request);
 
-        //    AdminCategories.Add(newCategory);
+            await GetVerifyPTOs();
 
-        //    OnChange.Invoke();
-
-        //    return newCategory;
-        //}
+            OnChange.Invoke();
+        }
 
 
     }

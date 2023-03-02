@@ -115,7 +115,19 @@ namespace CalyxAttendanceManagement.Server.Controllers
         {
             return await _authService.GetVerifyPTO();
         }
-        
+
+        [HttpPost("update-verify-pto"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<bool>>> UpdateVerifyPTO([FromBody] UpdateUserPTO updateUserPTO)
+        {
+            var response = await _authService.UpdateVerifyPTO(updateUserPTO.UserPTOHistoryId, updateUserPTO.Result);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
     }
 
 }

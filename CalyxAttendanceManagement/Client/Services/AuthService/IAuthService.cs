@@ -13,5 +13,6 @@
         Task GetUsers();
         Task<ServiceResponse<bool>> UpdateProfile(UpdateProfile request);
         Task GetVerifyPTOs();
+        Task UpdateVerifyPTO(UpdateUserPTO request);
     }
 }
