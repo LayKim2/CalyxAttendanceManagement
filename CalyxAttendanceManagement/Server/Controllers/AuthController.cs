@@ -109,6 +109,13 @@ namespace CalyxAttendanceManagement.Server.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("get-verify-pto"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<VerifyUserPTO>>>> GetVerifyPTO()
+        {
+            return await _authService.GetVerifyPTO();
+        }
+        
     }
 
 }

@@ -12,6 +12,7 @@
         }
 
         public List<User> Users { get; set; } = new List<User>();
+        public List<VerifyUserPTO> VerifyUserPTOs { get; set; } = new List<VerifyUserPTO>();
 
         public event Action OnChange;
 
@@ -62,5 +63,31 @@
 
             return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
         }
+
+        public async Task GetVerifyPTOs()
+        {
+            var response = await _http.GetFromJsonAsync<ServiceResponse<List<VerifyUserPTO>>>("api/auth/get-verify-pto");
+
+            if (response.Success)
+                VerifyUserPTOs = response.Data;
+
+        }
+
+        //public UpdateUserPTO CreateNewCategory()
+        //{
+        //    var newCategory = new Category()
+        //    {
+        //        IsNew = true,
+        //        Editing = true
+        //    };
+
+        //    AdminCategories.Add(newCategory);
+
+        //    OnChange.Invoke();
+
+        //    return newCategory;
+        //}
+
+
     }
 }

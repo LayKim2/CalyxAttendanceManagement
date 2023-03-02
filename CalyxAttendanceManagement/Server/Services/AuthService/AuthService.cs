@@ -226,6 +226,35 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
             }
         }
 
+        public async Task<ServiceResponse<List<VerifyUserPTO>>> GetVerifyPTO()
+        {
+            List<VerifyUserPTO> verifyUserPTO;
+
+            verifyUserPTO = (from uph in _context.UserPTOHistory
+                            join up in _context.UserPTO on uph.UserPTOId equals up.Id
+                            join u in _context.Users on uph.UserId equals u.Id
+                            where uph.VerifiedType == "Pending"
+                            orderby uph.UpdatedTime
+                            select new VerifyUserPTO
+                            {
+                                Name = u.Name,
+                                Email = u.Email,
+                                Belong = u.Belong,
+                                Pto = up.Pto,
+                                PTOType = uph.PTOType,
+                                CountType = uph.CountType,
+                                Count = uph.Count,
+                                Comment = uph.Comment,
+                                Date = uph.Date,
+                                CreatedDate = uph.UpdatedTime
+                            }).ToList();
+
+            return new ServiceResponse<List<VerifyUserPTO>>
+            {
+                Data = verifyUserPTO
+            };
+        }
+
         public async Task<ServiceResponse<bool>> UpdateProfile(int userId, UpdateProfile profile)
         {
             var email = GetUserEmail();

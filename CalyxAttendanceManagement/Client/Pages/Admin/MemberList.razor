@@ -1,8 +1,8 @@
-﻿@page "/admin/pto"
-@attribute [Authorize(Roles = "Admin")]
+﻿@attribute [Authorize(Roles = "Admin")]
 @inject AuthenticationStateProvider AuthStateProvider
 @inject IAuthService AuthService
 @implements IDisposable
+
 
 <RadzenDataGrid AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="2" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center"
                 Data="@AuthService.Users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" RowRender="@RowRender" ExpandMode="DataGridExpandMode.Single" RowExpand="RowExpand">
