@@ -237,6 +237,7 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
                             orderby uph.UpdatedTime
                             select new VerifyUserPTO
                             {
+                                Id = uph.Id,
                                 Name = u.Name,
                                 Email = u.Email,
                                 Belong = u.Belong,

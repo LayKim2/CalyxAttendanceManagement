@@ -24,7 +24,7 @@
         <RadzenDataGridColumn TItem="VerifyUserPTO" Property="PTOType" Title="PTO Type" Width="120px" />
         <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Comment" Title="Comment" Width="160px" />
         <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Pto" Title="Current PTO" Width="80px" />
-        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="CreatedDate" Title="Created Date" Width="160px" FormatString="{0:d}" />
+        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="CreatedDate" Title="Requested Date" Width="120px" FormatString="{0:d}" />
         @*<RadzenDataGridColumn TItem="User" Property="PhoneNumber" Title="Phone" Width="160px"/>
         <RadzenDataGridColumn TItem="User" Property="IsAuthenticated" Title="Verified Email" Width="140px">
             <Template Context="user">
@@ -37,9 +37,10 @@
                 <RadzenText>@user.UserPTO.Pto</RadzenText>
             </Template>
         </RadzenDataGridColumn>*@
-        <RadzenDataGridColumn TItem="User" Property="" Title="Detail" Width="160px" Filterable="false" TextAlign="TextAlign.Center">
-            <Template Context="user">
-                <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Radzen.Variant.Flat" Shade="Shade.Lighter" Icon="info" Text="Detail" Click=@(() => UpdatePTOStatus(user.Id)) />
+        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="" Title="Result" Width="160px" Filterable="false" TextAlign="TextAlign.Center">
+            <Template Context="verifyUserPTO">
+                <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Radzen.Variant.Flat" Shade="Shade.Lighter" Icon="check_circle_outline" Text="Accept" Click=@(() => UpdatePTOStatus(verifyUserPTO.Id, true)) />
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Variant="Radzen.Variant.Flat" Shade="Shade.Lighter" Icon="highlight_off" Text="Reject" Click=@(() => UpdatePTOStatus(verifyUserPTO.Id, false)) />
             </Template>
         </RadzenDataGridColumn>
     </Columns>
@@ -63,7 +64,7 @@
         AuthService.OnChange -= StateHasChanged;
     }
 
-    async Task UpdatePTOStatus(int flag)
+    async Task UpdatePTOStatus(int historyId, bool isAccept)
     {
         
     }
