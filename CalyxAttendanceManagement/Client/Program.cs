@@ -20,6 +20,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 //DI
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICalendarService, CalendarService>();
 
 // Local Storage
 builder.Services.AddBlazoredLocalStorage();

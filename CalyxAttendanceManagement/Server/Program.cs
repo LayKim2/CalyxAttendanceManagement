@@ -1,3 +1,4 @@
+using CalyxAttendanceManagement.Server.Services.CalendarService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,6 +21,7 @@ builder.Services.AddSwaggerGen();
 
 // DI
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICalendarService, CalendarService>();
 
 // auth (Middleware)
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

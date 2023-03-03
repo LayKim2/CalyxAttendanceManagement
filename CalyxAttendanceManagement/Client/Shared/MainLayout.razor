@@ -37,6 +37,8 @@
             <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always" Style="width:200px;">
                  <MudNavMenu>
                     <MudNavLink Class="nav-link" Style="color:#616161;" Href="/home" Icon="@Icons.Material.Outlined.Home">Home</MudNavLink>
+                    <MudNavLink Class="nav-link" Style="color:#616161;" Href="/calendar" Icon="@Icons.Material.Outlined.Schedule">Calendar</MudNavLink>
+                    <MudNavLink Class="nav-link" Style="color:#616161;" Href="/pto" Icon="@Icons.Material.Outlined.Timeline">PTO</MudNavLink>
                     @if (role == "Admin")
                     {
                         <MudNavLink Class="nav-link" Style="color:#616161;" Href="/admin" Icon="@Icons.Material.Outlined.Schedule">Admin</MudNavLink>

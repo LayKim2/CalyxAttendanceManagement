@@ -1,4 +1,4 @@
-﻿@page "/pto"
+﻿@*@page "/pto"
 @attribute [Authorize(Roles = "Admin")]
 @inject AuthenticationStateProvider AuthStateProvider
 @inject IAuthService AuthService
@@ -39,3 +39,4 @@
         AuthService.OnChange -= StateHasChanged;
     }
 }
+*@

@@ -38,15 +38,13 @@
   <!--DI-->
   <ItemGroup>
     <Using Include="CalyxAttendanceManagement.Client.Services.AuthService" />
+    <Using Include="CalyxAttendanceManagement.Client.Services.CalendarService" />
   </ItemGroup>
 
   <!--Nuget-->
   <ItemGroup>
     <Using Include="System.Net.Http.Json" />
     <Using Include="Blazored.LocalStorage" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\User\" />
   </ItemGroup>
 
 </Project>

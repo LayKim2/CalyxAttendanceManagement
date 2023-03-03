@@ -38,5 +38,6 @@
   <!--DI-->
   <ItemGroup>
     <Using Include="CalyxAttendanceManagement.Server.Services.AuthService" />
+    <Using Include="CalyxAttendanceManagement.Server.Services.CalendarService" />
   </ItemGroup>
 </Project>
