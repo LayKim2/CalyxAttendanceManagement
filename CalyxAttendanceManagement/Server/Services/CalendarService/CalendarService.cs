@@ -1,6 +1,4 @@
-﻿using Radzen.Blazor.Rendering;
-
-namespace CalyxAttendanceManagement.Server.Services.CalendarService;
+﻿namespace CalyxAttendanceManagement.Server.Services.CalendarService;
 
 public class CalendarService : ICalendarService
 {

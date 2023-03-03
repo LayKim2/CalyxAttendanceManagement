@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Radzen.Blazor.Rendering;
 
@@ -15,14 +16,14 @@ namespace CalyxAttendanceManagement.Server.Controllers
             _calendarService = calendarService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ServiceResponse<IList<Calendar>>>> GetCalendar(int id)
+        [HttpGet, Authorize]
+        public async Task<ActionResult<ServiceResponse<IList<Calendar>>>> GetCalendar()
         {
             return await _calendarService.GetCalendar();
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ServiceResponse<bool>>> AddorCalendar(Calendar calendar)
+        [HttpPost("add-calendar"), Authorize]
+        public async Task<ActionResult<ServiceResponse<bool>>> AddCalendar(Calendar calendar)
         {
             return await _calendarService.AddCalendar(calendar);
         }

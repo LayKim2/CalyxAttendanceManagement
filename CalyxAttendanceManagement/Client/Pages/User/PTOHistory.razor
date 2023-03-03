@@ -1,0 +1,35 @@
+﻿@attribute [Authorize]
+@inject IPTOService PTOService
+@implements IDisposable
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@PTOService.UserPTOHistories" TItem="UserPTOHistory" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+    <Columns>
+        <RadzenDataGridColumn TItem="UserPTOHistory" Property="Id" Filterable="false" Title="ID" Frozen="true" Width="50px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="UserPTOHistory" Property="Date" Title="Date" FormatString="{0:d}" Width="140px" />
+        <RadzenDataGridColumn TItem="UserPTOHistory" Property="PTOType" Title="PTO Type" Frozen="true" Width="100px" />
+        <RadzenDataGridColumn TItem="UserPTOHistory" Property="Before" Title="Before" Frozen="true" Width="100px" />
+        <RadzenDataGridColumn TItem="UserPTOHistory" Property="Count" Title="Count" Frozen="true" Width="100px" />
+        <RadzenDataGridColumn TItem="UserPTOHistory" Property="Current" Title="Current" Frozen="true" Width="100px" />
+        <RadzenDataGridColumn TItem="UserPTOHistory" Property="Comment" Title="Comment" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="UserPTOHistory" Property="VerifiedType" Title="Result" Width="120px" />
+    </Columns>
+</RadzenDataGrid>
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await PTOService.GetUserPTOHistories();
+
+        PTOService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        PTOService.OnChange -= StateHasChanged;
+    }
+}

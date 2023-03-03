@@ -39,5 +39,6 @@
   <ItemGroup>
     <Using Include="CalyxAttendanceManagement.Server.Services.AuthService" />
     <Using Include="CalyxAttendanceManagement.Server.Services.CalendarService" />
+    <Using Include="CalyxAttendanceManagement.Server.Services.PTOService" />
   </ItemGroup>
 </Project>

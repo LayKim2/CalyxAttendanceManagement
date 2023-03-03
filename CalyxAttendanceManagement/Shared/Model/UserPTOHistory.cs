@@ -20,7 +20,4 @@ public class UserPTOHistory
     public string Comment { get; set; } = string.Empty;
     public DateTime UpdatedTime { get; set; } = DateTime.Now;
     public string VerifiedType { get; set; } = "Pending";
-
-    [NotMapped]
-    public string Color { get; set; }
 }
