@@ -5,8 +5,8 @@
 <MainTitle Title="PTO" Description="@ptoCountText" />
 
 <MudBlazor.MudTabs Elevation="25" Color="MudBlazor.Color.Transparent" Rounded="true" PanelClass="mt-6">
-    <MudBlazor.MudTabPanel Text="APPLY PTO">
-        <ApplyPTO />
+    <MudBlazor.MudTabPanel Text="APPLY">
+        <RequestPTO />
     </MudBlazor.MudTabPanel>
     <MudBlazor.MudTabPanel Text="HISTORY">
         <PTOHistory />
@@ -20,6 +20,6 @@
     {
         await PTOService.GetPTOCount();
 
-        ptoCountText = "Current PTO Count : " + PTOService.UserPTOCount.ToString();
+        ptoCountText = "현재 PTO 개수 : " + PTOService.UserPTOCount.ToString();
     }
 }

@@ -12,6 +12,6 @@ public class VerifyUserPTO
     public string CountType { get; set; } = string.Empty;
     public decimal Count { get; set; }
     public string Comment { get; set; } = string.Empty;
-    public DateTime Date { get; set; } = DateTime.Now;
-    public DateTime CreatedDate { get; set; } = DateTime.Now;
+    public DateTime? Date { get; set; } = DateTime.Now;
+    public DateTime? CreatedDate { get; set; } = DateTime.Now;
 }

@@ -26,6 +26,11 @@ namespace CalyxAttendanceManagement.Server.Controllers
         {
             return await _ptoService.GetPTOCount();
         }
-        
+
+        [HttpPost("request-pto"), Authorize]
+        public async Task<ActionResult<ServiceResponse<bool>>> RequestPTO([FromBody] UserRequestPTO request)
+        {
+            return await _ptoService.RequestPTO(request);
+        }
     }
 }

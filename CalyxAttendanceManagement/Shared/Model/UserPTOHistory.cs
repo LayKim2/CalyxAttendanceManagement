@@ -7,17 +7,17 @@ public class UserPTOHistory
 {
     public int Id { get; set; }
 
-    public int UserPTOId { get; set; }
-
     [ForeignKey("User")]
     public int UserId { get; set; }
-    public decimal Before { get; set; }
-    public DateTime Date { get; set; } = DateTime.Now;
-    public string PTOType { get; set; } = string.Empty;
-    public string CountType { get; set; } = string.Empty;
-    public decimal Count { get; set; }
-    public decimal Current { get; set; }
+    public int UserPTOId { get; set; }
+    public string PTOType { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
+    public decimal NeedPTO { get; set; }
+    public decimal CurrentPTO { get; set; }
+    public decimal CalculatedPTO { get; set; }
     public string Comment { get; set; } = string.Empty;
-    public DateTime UpdatedTime { get; set; } = DateTime.Now;
-    public string VerifiedType { get; set; } = "Pending";
+    public string VerifiedType { get; set; }
+    public DateTime? CreatedDate { get; set; }
+    public DateTime? VerifiedDate { get; set; }
 }

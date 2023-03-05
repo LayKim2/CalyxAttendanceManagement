@@ -234,7 +234,7 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
                             join up in _context.UserPTO on uph.UserPTOId equals up.Id
                             join u in _context.Users on uph.UserId equals u.Id
                             where uph.VerifiedType == "Pending"
-                            orderby uph.UpdatedTime
+                            orderby uph.CreatedDate
                             select new VerifyUserPTO
                             {
                                 Id = uph.Id,
@@ -243,11 +243,9 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
                                 Belong = u.Belong,
                                 Pto = up.Pto,
                                 PTOType = uph.PTOType,
-                                CountType = uph.CountType,
-                                Count = uph.Count,
+                                Count = uph.NeedPTO,
                                 Comment = uph.Comment,
-                                Date = uph.Date,
-                                CreatedDate = uph.UpdatedTime
+                                CreatedDate = uph.CreatedDate
                             }).ToList();
 
             return new ServiceResponse<List<VerifyUserPTO>>
@@ -353,15 +351,25 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
                     {
                         if (result)
                         {
-                            userPto.Pto = userPto.Pto - UserPTOHistory.Count;
+                            userPto.Pto = userPto.Pto - UserPTOHistory.NeedPTO;
 
                             UserPTOHistory.VerifiedType = "Accepted";
-                            UserPTOHistory.UpdatedTime = DateTime.Now;
+                            UserPTOHistory.VerifiedDate = DateTime.Now;
                         } else
                         {
                             UserPTOHistory.VerifiedType = "Rejected";
-                            UserPTOHistory.UpdatedTime = DateTime.Now;
+                            UserPTOHistory.VerifiedDate = DateTime.Now;
                         }
+
+                        var calendar = new Calendar()
+                        {
+                            UserId = userId,
+                            Start = UserPTOHistory.StartDate,
+                            End = UserPTOHistory.EndDate,
+                            Text = "[PTO] " + UserPTOHistory.PTOType
+                        };
+
+                        _context.Add(calendar);
 
                         await _context.SaveChangesAsync();
 
