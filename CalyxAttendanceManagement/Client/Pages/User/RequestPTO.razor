@@ -86,12 +86,15 @@
 </RadzenTemplateForm>
 
 @code {
+    [Parameter]
+    public decimal PTOCount { get; set; }
+
     private bool isHidden = true;
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    await PTOService.GetPTOCount();
-    //}
+    protected override async Task OnParametersSetAsync()
+    {
+        PTOService.UserRequestPTO.CurrentPTOCount = PTOCount;
+    }
 
     IList<string> ptoTypes = new List<string>()
     {

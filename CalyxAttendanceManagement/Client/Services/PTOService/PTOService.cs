@@ -30,8 +30,6 @@ public class PTOService : IPTOService
     {
         var response = await _http.GetFromJsonAsync<ServiceResponse<decimal>>("api/pto/get-pto-count");
        
-        UserRequestPTO.CurrentPTOCount = response.Data;
-
         UserPTOCount = response.Data;
     }
 

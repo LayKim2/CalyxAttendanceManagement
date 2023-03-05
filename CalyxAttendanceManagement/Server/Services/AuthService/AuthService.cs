@@ -355,21 +355,21 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
                             UserPTOHistory.VerifiedType = "Accepted";
                             UserPTOHistory.VerifiedDate = DateTime.Now;
+
+                            var calendar = new Calendar()
+                            {
+                                UserId = userId,
+                                Start = UserPTOHistory.StartDate,
+                                End = UserPTOHistory.EndDate,
+                                Text = "[PTO] " + UserPTOHistory.PTOType
+                            };
+
+                            _context.Add(calendar);
                         } else
                         {
                             UserPTOHistory.VerifiedType = "Rejected";
                             UserPTOHistory.VerifiedDate = DateTime.Now;
                         }
-
-                        var calendar = new Calendar()
-                        {
-                            UserId = userId,
-                            Start = UserPTOHistory.StartDate,
-                            End = UserPTOHistory.EndDate,
-                            Text = "[PTO] " + UserPTOHistory.PTOType
-                        };
-
-                        _context.Add(calendar);
 
                         await _context.SaveChangesAsync();
 
