@@ -301,6 +301,34 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
             return new ServiceResponse<bool> { Data = true, Message = "Password has been changed." };
         }
 
+        private async Task<bool> VerifyEmail(SendEmail request, UserPTOHistory userPTOHistory)
+        {
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("koreaus1@naver.com", "Calyx Attendance Management");
+            var to = new EmailAddress(request.Email, request.Name);
+            var subject = "PTO Result";
+            var plainTextContent = "";
+            var datehtml = "";
+
+            if (userPTOHistory.PTOType == "1일 이상")
+            {
+                datehtml = userPTOHistory.StartDate.Value.ToString("MM/dd/yyyy") + "~" + userPTOHistory.EndDate.Value.ToString("MM/dd/yyyy");
+            }
+            else
+            {
+                datehtml = userPTOHistory.StartDate.Value.ToString("MM/dd/yyyy");
+            };
+
+            var htmlContent = $"Hi, {request.Name} <br/></br/> <strong>Result : {userPTOHistory.VerifiedType}</strong> <br/></br/>  신청자 : {request.Name}, {request.Email} <br/><br/> PTO Type : {userPTOHistory.PTOType} <br/><br/> Date : {datehtml} <br/><br/> {userPTOHistory.Comment} <br/></br/></br/> Thank you";
+
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+
+            var response = await client.SendEmailAsync(msg);
+
+            return true;
+        }
+
         public async Task<ServiceResponse<bool>> UpdateVerifyPTO(int historyId, bool result)
         {
             var id = GetUserId();
@@ -372,6 +400,14 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
                         }
 
                         await _context.SaveChangesAsync();
+
+                        // send email
+                        var user = await _context.Users.Where(u => u.Id == UserPTOHistory.UserId).FirstOrDefaultAsync();
+
+                        if (user != null)
+                        {
+                            await VerifyEmail(new SendEmail { Email = user.Email, Name = user.Name }, UserPTOHistory);
+                        }
 
                         return new ServiceResponse<bool>
                         {

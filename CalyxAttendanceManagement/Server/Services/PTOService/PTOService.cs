@@ -1,4 +1,5 @@
-﻿using CalyxAttendanceManagement.Shared;
+﻿using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace CalyxAttendanceManagement.Server.Services.PTOService;
 
@@ -29,6 +30,33 @@ public class PTOService : IPTOService
         var userPTOCount = await _context.UserPTO.Where(a => a.UserId == userId).Select(a => a.Pto).FirstOrDefaultAsync();
 
         return new ServiceResponse<decimal> { Data = userPTOCount };
+    }
+
+    private async Task<bool> RequestEmail(SendEmail request, UserPTOHistory userPTOHistory)
+    {
+        var apiKey = "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";
+        var client = new SendGridClient(apiKey);
+        var from = new EmailAddress("koreaus1@naver.com", "Calyx Attendance Management");
+        var to = new EmailAddress(request.Email, request.Name);
+        var subject = "PTO 신청";
+        var plainTextContent = "";
+        var datehtml = "";
+
+        if(userPTOHistory.PTOType == "1일 이상")
+        {
+            datehtml = userPTOHistory.StartDate.Value.ToString("MM/dd/yyyy") + "~"  + userPTOHistory.EndDate.Value.ToString("MM/dd/yyyy");
+        } else
+        {
+            datehtml = userPTOHistory.StartDate.Value.ToString("MM/dd/yyyy");
+        };
+
+        var htmlContent = $"Hi, Wayne <br/></br/> 신청자 : {request.Name}, {request.Email} <br/><br/> PTO Type : {userPTOHistory.PTOType} <br/><br/> Date : {datehtml} <br/><br/> {userPTOHistory.Comment} <br/></br/></br/> Thank you";
+        
+        var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+        
+        var response = await client.SendEmailAsync(msg);
+
+        return true;
     }
 
     public async Task<ServiceResponse<bool>> RequestPTO(UserRequestPTO requestPTO)
@@ -81,6 +109,14 @@ public class PTOService : IPTOService
                 _context.Add(userPTOHistory);
 
                 await _context.SaveChangesAsync();
+
+                // send email
+                var user = await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
+
+                if(user != null)
+                {
+                    await RequestEmail(new SendEmail { Email = user.Email, Name = user.Name }, userPTOHistory);
+                }
 
                 return new ServiceResponse<bool> { Data = true };
             } else

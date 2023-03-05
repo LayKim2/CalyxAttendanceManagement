@@ -20,18 +20,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
-                            <RadzenLabel Text="PTO 신청일"/>
+                            <RadzenLabel Text="PTO 신청일" />
                         </div>
                         <div class="col-md-3">
                             <RadzenDatePicker TItem="datetime?" @bind-Value=@PTOService.UserRequestPTO.StartDate InitialViewDate=@(DateTime.Now) DateFormat="MM/dd/yyyy" Min="DateTime.Today" Change="@CalculateNeedPTO" style="width: 100%;" />
-                        </div> 
+                        </div>
                         <div id="divEndDate" class="col-md-3">
                             <RadzenDatePicker TItem="datetime?" Name="endDate" @bind-Value=@PTOService.UserRequestPTO.EndDate InitialViewDate=@(DateTime.Now) DateFormat="MM/dd/yyyy" Visible="!isHidden" Min="@PTOService.UserRequestPTO.StartDate" Change="CalculateNeedPTO" style="width: 100%;" />
                             @if (PTOService.UserRequestPTO.PTOType == "1일 이상")
                             {
                                 <RadzenRequiredValidator Component="endDate" Text="End date is required" Style="position: absolute" />
                             }
-                            
+
                         </div>
                     </div>
 
@@ -110,17 +110,20 @@
 
     void ClearForm()
     {
-        PTOService.UserRequestPTO = new UserRequestPTO();
+        PTOService.UserRequestPTO = new UserRequestPTO()
+            {
+                CurrentPTOCount = PTOCount
+            };
     }
 
     void ChangeDateToggle()
     {
         switch (PTOService.UserRequestPTO.PTOType)
         {
-            case "1일 이상" :
+            case "1일 이상":
                 isHidden = false;
                 break;
-            default :
+            default:
                 isHidden = true;
                 break;
         }
@@ -144,7 +147,8 @@
             case "1일":
                 PTOService.UserRequestPTO.NeedPTOCount = 1M;
                 break;
-            case "오전반차": case "오후반차" :
+            case "오전반차":
+            case "오후반차":
                 PTOService.UserRequestPTO.NeedPTOCount = 0.5M;
                 break;
             default:
@@ -164,7 +168,8 @@
             Snackbar.Clear();
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
             Snackbar.Add(result.Message, MudBlazor.Severity.Error);
-        } else
+        }
+        else
         {
             ClearForm();
 

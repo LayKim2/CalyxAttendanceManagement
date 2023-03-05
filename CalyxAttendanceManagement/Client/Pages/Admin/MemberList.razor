@@ -6,24 +6,6 @@
 
 <RadzenDataGrid AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center"
                 Data="@AuthService.Users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" RowRender="@RowRender" ExpandMode="DataGridExpandMode.Single" RowExpand="RowExpand">
-    <Template Context="user">
-        <RadzenDataGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@user.UserPTO.UserPtoHistory" TItem="CalyxAttendanceManagement.Shared.Model.UserPTOHistory">
-            <Columns>
-                <RadzenDataGridColumn TItem="UserPTOHistory" Property="Id" Title="#" Width="80px"/>
-                <RadzenDataGridColumn TItem="UserPTOHistory" Property="Date" Title="Date" />
-                <RadzenDataGridColumn TItem="UserPTOHistory" Property="PTOType" Title="Type" Filterable="false"/>
-                <RadzenDataGridColumn TItem="UserPTOHistory" Property="Count" Title="Count" Filterable="false" />
-                <RadzenDataGridColumn TItem="UserPTOHistory" Property="Current" Title="Current" Filterable="false" />
-                <RadzenDataGridColumn TItem="UserPTOHistory" Property="Comment" Title="Comment" Filterable="false" />
-                <RadzenDataGridColumn TItem="UserPTOHistory" Property="" Title="Result" Filterable="false">
-                    <Template Context="userPTOHistory">
-                        <RadzenBadge Shade="Shade.Lighter" BadgeStyle="@(userPTOHistory.VerifiedType == "Pending" ? BadgeStyle.Light: userPTOHistory.VerifiedType == "Rejected" ? BadgeStyle.Secondary : BadgeStyle.Info )" Text="@userPTOHistory.VerifiedType" />
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="UserPTOHistory" Property="UpdatedTime" Title="Updated Time" Filterable="false" TextAlign="TextAlign.Center" />
-            </Columns>
-        </RadzenDataGrid>
-    </Template>
     <Columns>
         <RadzenDataGridColumn TItem="User" Property="Id" Filterable="false" Title="#" Frozen="true" Width="40px" TextAlign="TextAlign.Center" />
         <RadzenDataGridColumn TItem="User" Property="Name" Title="Employee" Frozen="true" Sortable="false" Filterable="false" Width="120px" TextAlign="TextAlign.Center">
