@@ -20,4 +20,7 @@ public class UserPTOHistory
     public string VerifiedType { get; set; }
     public DateTime? CreatedDate { get; set; }
     public DateTime? VerifiedDate { get; set; }
+
+    [NotMapped]
+    public string Date { get; set; } = string.Empty;
 }

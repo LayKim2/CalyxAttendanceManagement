@@ -4,7 +4,7 @@
 @implements IDisposable
 
 
-<RadzenDataGrid AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="2" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center"
+<RadzenDataGrid AllowFiltering="true" IsLoading=@isLoading AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center" ShowPagingSummary="true"
                 Data="@AuthService.VerifyUserPTOs" TItem="VerifyUserPTO" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
     <Columns>
         @*<RadzenDataGridColumn TItem="VerifyUserPTO" Property="Id" Filterable="false" Title="#" Frozen="true" Width="40px" TextAlign="TextAlign.Center" />*@
@@ -48,15 +48,20 @@
 
 
 @code {
+    bool isLoading = false;
     UpdateUserPTO updateUserPTO = new UpdateUserPTO();
 
     protected override async Task OnInitializedAsync()
     {
+        isLoading = true;
+
         await base.OnInitializedAsync();
 
         await AuthService.GetVerifyPTOs();
 
         AuthService.OnChange += StateHasChanged;
+
+        isLoading = false;
     }
 
     public void Dispose()

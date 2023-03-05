@@ -19,7 +19,20 @@ public class PTOService : IPTOService
         int userId = _authService.GetUserId();
 
         var userPTOHistories = await _context.UserPTOHistory.Where(a => a.UserId == userId).OrderByDescending(a => a.Id).ToListAsync();
-        
+
+        foreach(var item in userPTOHistories)
+        {
+            switch (item.PTOType)
+            {
+                case "1일 이상":
+                    item.Date = item.StartDate.Value.ToString("MM/dd/yyyy") + " ~ " + item.EndDate.Value.ToString("MM/dd/yyyy");
+                    break;
+                default:
+                    item.Date = item.StartDate.Value.ToString("MM/dd/yyyy");
+                    break;
+            }
+        }
+
         return new ServiceResponse<IList<UserPTOHistory>> { Data = userPTOHistories };
     }
 

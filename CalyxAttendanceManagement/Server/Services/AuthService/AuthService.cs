@@ -222,6 +222,24 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
                                 .ThenInclude(p => p.UserPtoHistory)
                                 .ToListAsync();
 
+                foreach (var u in users)
+                {
+                    foreach(var data in u.UserPTO.UserPtoHistory)
+                    {
+                        switch (data.PTOType)
+                        {
+                            case "1일 이상":
+                                data.Date = data.StartDate.Value.ToString("MM/dd/yyyy") + " ~ " + data.EndDate.Value.ToString("MM/dd/yyyy");
+                                break;
+                            default:
+                                data.Date = data.StartDate.Value.ToString("MM/dd/yyyy");
+                                break;
+                        }
+                    }
+
+                    u.UserPTO.UserPtoHistory = u.UserPTO.UserPtoHistory.OrderByDescending(uph => uph.Id);
+                }
+
                 return new ServiceResponse<List<User>> { Data = users };
             }
         }

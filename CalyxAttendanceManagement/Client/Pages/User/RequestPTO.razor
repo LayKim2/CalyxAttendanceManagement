@@ -40,8 +40,7 @@
                             <RadzenLabel Text="현재 PTO" />
                         </div>
                         <div class="col-md-2">
-                            @*<MudTextField @bind-Value="@PTOService.UserPTOCount" ReadOnly Disabled></MudTextField>*@
-                            @*<RadzenTextBox Type="number" Format="n2" @bind-Value="@PTOService.UserPTOCount" ReadOnly Disabled />*@
+                            @*<RadzenText ></RadzenText>*@
                             <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.CurrentPTOCount" Name="CurrentPTOCount" ReadOnly Disabled Style="" />
                         </div>
                     </div>
@@ -69,7 +68,19 @@
                             <RadzenLabel Text="Comment" />
                         </div>
                         <div class="col-md-10">
-                            <RadzenTextArea Cols="70" Rows="10" @bind-Value="@PTOService.UserRequestPTO.Comment"></RadzenTextArea>
+                            <RadzenHtmlEditor @bind-Value="@PTOService.UserRequestPTO.Comment" style="height: 250px; margin-bottom: 1rem;">
+                                <RadzenHtmlEditorUndo />
+                                <RadzenHtmlEditorRedo />
+                                <RadzenHtmlEditorSeparator />
+                                <RadzenHtmlEditorBold />
+                                <RadzenHtmlEditorItalic />
+                                <RadzenHtmlEditorUnderline />
+                                <RadzenHtmlEditorStrikeThrough />
+                                <RadzenHtmlEditorSeparator />
+                                <RadzenHtmlEditorColor />
+                                <RadzenHtmlEditorBackground />
+                                <RadzenHtmlEditorRemoveFormat />
+                            </RadzenHtmlEditor>
                         </div>
                     </div>
 

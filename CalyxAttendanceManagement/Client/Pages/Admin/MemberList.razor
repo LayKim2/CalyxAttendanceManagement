@@ -4,8 +4,27 @@
 @implements IDisposable
 
 
-<RadzenDataGrid AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center"
+<RadzenDataGrid AllowFiltering="true" IsLoading=@isLoading AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center" ShowPagingSummary="true"
                 Data="@AuthService.Users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" RowRender="@RowRender" ExpandMode="DataGridExpandMode.Single" RowExpand="RowExpand">
+    <Template Context="user">
+        <RadzenDataGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@user.UserPTO.UserPtoHistory" TItem="CalyxAttendanceManagement.Shared.Model.UserPTOHistory" PageSize="5">
+            <Columns>
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="Id" Frozen="true" Title="#" Width="100px" TextAlign="TextAlign.Center"/>
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="Date" Frozen="true" Title="Date" Width="220px;" TextAlign="TextAlign.Center"/>
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="PTOType" Title="PTO Type" Filterable="false" TextAlign="TextAlign.Center"/>
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="CurrentPTO" Title="현재 PTO" Filterable="false" TextAlign="TextAlign.Center"/>
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="NeedPTO" Title="필요한 PTO" Filterable="false" TextAlign="TextAlign.Center"/>
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="Comment" Title="Comment" Filterable="false" />
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="CreatedDate" Title="신청일" Filterable="false" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="VerifiedDate" Title="처리일" Width="180px;" Frozen="true" Filterable="false" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="UserPTOHistory" Property="VerifiedType" Title="Status" Filterable="false" TextAlign="TextAlign.Center">
+                    <Template Context="userPTOHistory">
+                        <RadzenBadge Shade="Shade.Lighter" BadgeStyle="@(userPTOHistory.VerifiedType == "Pending" ? BadgeStyle.Light: userPTOHistory.VerifiedType == "Rejected" ? BadgeStyle.Secondary : BadgeStyle.Info )" Text="@userPTOHistory.VerifiedType" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </Template>
     <Columns>
         <RadzenDataGridColumn TItem="User" Property="Id" Filterable="false" Title="#" Frozen="true" Width="40px" TextAlign="TextAlign.Center" />
         <RadzenDataGridColumn TItem="User" Property="Name" Title="Employee" Frozen="true" Sortable="false" Filterable="false" Width="120px" TextAlign="TextAlign.Center">
@@ -17,7 +36,7 @@
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" Width="180px" />
         <RadzenDataGridColumn TItem="User" Property="StartWorkDate" Title="Start Date" FormatString="{0:d}" Width="160px" />
-        <RadzenDataGridColumn TItem="User" Property="PhoneNumber" Title="Phone" Width="160px"/>
+        <RadzenDataGridColumn TItem="User" Property="PhoneNumber" Title="Phone" Width="160px" />
         <RadzenDataGridColumn TItem="User" Property="IsAuthenticated" Title="Verified Email" Width="140px">
             <Template Context="user">
                 <RadzenText Text="@(user.IsAuthenticated == true ? "Yes" : "No")"></RadzenText>
@@ -29,24 +48,24 @@
                 <RadzenText>@user.UserPTO.Pto</RadzenText>
             </Template>
         </RadzenDataGridColumn>
-        @*<RadzenDataGridColumn TItem="User" Property="" Title="Detail" Width="160px" Filterable="false" TextAlign="TextAlign.Center">
-            <Template Context="user">
-                <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Radzen.Variant.Flat" Shade="Shade.Lighter" Icon="info" Text="Detail" Click=@(() => OpenDetail(user.Id)) />
-            </Template>
-        </RadzenDataGridColumn>*@
     </Columns>
 </RadzenDataGrid>
 
 
 @code {
+    bool isLoading = false;
 
     protected override async Task OnInitializedAsync()
     {
+        isLoading = true;
+
         await base.OnInitializedAsync();
 
         await AuthService.GetUsers();
 
         AuthService.OnChange += StateHasChanged;
+
+        isLoading = false;
     }
 
     public void Dispose()
@@ -55,7 +74,7 @@
     }
     void RowRender(RowRenderEventArgs<User> args)
     {
-        
+
     }
 
     void RowExpand()
