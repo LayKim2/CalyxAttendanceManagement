@@ -16,6 +16,7 @@ public class User
     public byte[] PasswordSalt { get; set; }
     public DateTime DateCreated { get; set; } = DateTime.Now;
     public DateTime DateUpdated{ get; set; } = DateTime.Now;
+    public string key { get; set; } = string.Empty;
     public bool IsAuthenticated { get; set; } = false;
     public string Role { get; set; } = "Employee";
     public UserPTO UserPTO { get; set; }

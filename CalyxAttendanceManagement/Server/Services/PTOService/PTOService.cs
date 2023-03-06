@@ -1,4 +1,5 @@
-﻿using SendGrid;
+﻿using Microsoft.Extensions.Configuration;
+using SendGrid;
 using SendGrid.Helpers.Mail;
 
 namespace CalyxAttendanceManagement.Server.Services.PTOService;
@@ -6,11 +7,13 @@ namespace CalyxAttendanceManagement.Server.Services.PTOService;
 public class PTOService : IPTOService
 {
     private readonly DataContext _context;
+    private readonly IConfiguration _configuration;
     private readonly IAuthService _authService;
 
-    public PTOService(DataContext context, IAuthService authService)
+    public PTOService(DataContext context, IConfiguration configuration, IAuthService authService)
     {
         _context = context;
+        _configuration = configuration;
         _authService = authService;
     }
 
@@ -47,9 +50,9 @@ public class PTOService : IPTOService
 
     private async Task<bool> RequestEmail(SendEmail request, UserPTOHistory userPTOHistory)
     {
-        var apiKey = "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";
+        var apiKey = _configuration.GetSection("SendGridSettings:Key").Value;
         var client = new SendGridClient(apiKey);
-        var from = new EmailAddress("koreaus1@naver.com", "Calyx Attendance Management");
+        var from = new EmailAddress(_configuration.GetSection("SendGridSettings:UserEmail").Value, _configuration.GetSection("SendGridSettings:UserName").Value);
         var to = new EmailAddress(request.Email, request.Name);
         var subject = "PTO 신청";
         var plainTextContent = "";

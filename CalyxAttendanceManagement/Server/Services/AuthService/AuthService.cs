@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using CalyxAttendanceManagement.Shared.Model;
+using Microsoft.IdentityModel.Tokens;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.IdentityModel.Tokens.Jwt;
@@ -72,6 +73,7 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
             user.Name = user.FirstName + " " + user.LastName;
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.key = Guid.NewGuid().ToString();
 
             if (user.Email == "wayne_kim@calyxsoftware.com")
                 user.Role = "Admin";
@@ -80,7 +82,7 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
             await _context.SaveChangesAsync();
 
-            await SendEmail( new SendEmail { Name= user.Name, Email = user.Email });
+            await SendEmail(user);
 
             return new ServiceResponse<int> { Data = user.Id, Message = "Registration successful and Sent email for verify." };
         }
@@ -140,11 +142,11 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
             return jwt;
         }
 
-        public async Task<ServiceResponse<bool>> VerifyEmail(string email)
+        public async Task<ServiceResponse<bool>> VerifyEmail(string email, string key)
         {
             var response = new ServiceResponse<bool>();
 
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower().Equals(email.ToLower()));
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.ToLower().Equals(email.ToLower()) && x.key == key);
 
             if (user == null)
             {
@@ -163,19 +165,21 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
             return response;
         }
 
-        private async Task<bool> SendEmail(SendEmail request)
+        private async Task<bool> SendEmail(User user)
         {
-            var apiKey = "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";
+            var apiKey = _configuration.GetSection("SendGridSettings:Key").Value;
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("koreaus1@naver.com", "Calyx Attendance Management");
-            var to = new EmailAddress(request.Email, request.Name);
+            var from = new EmailAddress(_configuration.GetSection("SendGridSettings:UserEmail").Value, _configuration.GetSection("SendGridSettings:UserName").Value);
+            var to = new EmailAddress(user.Email, user.Name);
 
-            var templateId = "d-45b32869cd3e47f68af6a88fa36598b0";
+            var templateId = _configuration.GetSection("SendGridSettings:VerifyTemplate").Value;
+
             var dynamicTemplateData = new
             {
                 subject = "Verify Email Address for Calyx Attendance Management",
-                sender_name = request.Name,
-                sender_email = request.Email
+                sender_name = user.Name,
+                sender_email = user.Email,
+                key = user.key
             };
 
             var msg = MailHelper.CreateSingleTemplateEmail(from, to, templateId, dynamicTemplateData);
@@ -224,7 +228,13 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
                 foreach (var u in users)
                 {
-                    foreach(var data in u.UserPTO.UserPtoHistory)
+                    if(u.UserPTO == null)
+                        u.UserPTO = new UserPTO();
+
+                    if(u.UserPTO.UserPtoHistory == null)
+                        u.UserPTO.UserPtoHistory = new List<UserPTOHistory>();
+
+                    foreach (var data in u.UserPTO.UserPtoHistory)
                     {
                         switch (data.PTOType)
                         {
@@ -236,8 +246,6 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
                                 break;
                         }
                     }
-
-                    u.UserPTO.UserPtoHistory = u.UserPTO.UserPtoHistory.OrderByDescending(uph => uph.Id);
                 }
 
                 return new ServiceResponse<List<User>> { Data = users };
@@ -321,13 +329,13 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
         private async Task<bool> VerifyEmail(SendEmail request, UserPTOHistory userPTOHistory)
         {
-            var apiKey = "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";
+            var apiKey = _configuration.GetSection("SendGridSettings:Key").Value;
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("koreaus1@naver.com", "Calyx Attendance Management");
+            var from = new EmailAddress(_configuration.GetSection("SendGridSettings:UserEmail").Value, _configuration.GetSection("SendGridSettings:UserName").Value);
             var to = new EmailAddress(request.Email, request.Name);
             var subject = "PTO Result";
             var plainTextContent = "";
-            var datehtml = "";
+            var datehtml = string.Empty;
 
             if (userPTOHistory.PTOType == "1일 이상")
             {

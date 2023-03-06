@@ -55,9 +55,9 @@ namespace CalyxAttendanceManagement.Server.Controllers
         }
 
         [HttpGet("verify_email")]
-        public async Task<ActionResult> VerifyEmail(string email)
+        public async Task<ActionResult> VerifyEmail(string email, string key)
         {
-            var response = await _authService.VerifyEmail(email);
+            var response = await _authService.VerifyEmail(email, key);
 
             //if (!response.Success)
             //{

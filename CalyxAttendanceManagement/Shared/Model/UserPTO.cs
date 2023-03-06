@@ -10,5 +10,5 @@ public class UserPTO
     [ForeignKey("User")]
     public int UserId { get; set; }
     public decimal Pto { get; set; }
-    public IEnumerable<UserPTOHistory> UserPtoHistory { get; set; }
+    public IEnumerable<UserPTOHistory> UserPtoHistory { get; set; } = new List<UserPTOHistory>();
 }
