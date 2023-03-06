@@ -17,7 +17,7 @@
                 <MudSelectItem Value="@("Path")" />
                 <MudSelectItem Value="@("QA")" />
             </MudSelect>
-            <MudDatePicker Label="Start Date" Class="mt-3"
+            <MudDatePicker Label="입사일" Class="mt-3"
                            @bind-Date="user.StartWorkDate" For="@(() => user.StartWorkDate)" />
             <MudTextField Label="Password" Class="mt-5"
                           @bind-Value="user.Password" For="@(() => user.Password)" InputType="InputType.Password" />

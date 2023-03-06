@@ -7,7 +7,6 @@
 <RadzenDataGrid AllowFiltering="true" IsLoading=@isLoading AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center" ShowPagingSummary="true"
                 Data="@AuthService.VerifyUserPTOs" TItem="VerifyUserPTO" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
     <Columns>
-        @*<RadzenDataGridColumn TItem="VerifyUserPTO" Property="Id" Filterable="false" Title="#" Frozen="true" Width="40px" TextAlign="TextAlign.Center" />*@
         <RadzenDataGridColumn Width="50px" TItem="VerifyUserPTO" Title="#" Filterable="false" Sortable="false" TextAlign="TextAlign.Center">
             <Template Context="verifyUserPTO">
                 @(AuthService.VerifyUserPTOs.IndexOf(verifyUserPTO) + 1)
@@ -20,23 +19,11 @@
                 <RadzenText TextStyle="TextStyle.Caption">@verifyUserPTO.Belong</RadzenText>
             </Template>
         </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Date" Title="Date" Width="160px" FormatString="{0:d}" />
-        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="PTOType" Title="PTO Type" Width="120px" />
+        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Date" Title="PTO Date" Width="160px" FormatString="{0:d}"/>
+        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="PTOType" Title="PTO Type" Width="120px" TextAlign="TextAlign.Center"/>
         <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Comment" Title="Comment" Width="160px" />
-        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Pto" Title="Current PTO" Width="80px" />
-        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="CreatedDate" Title="Requested Date" Width="120px" FormatString="{0:d}" />
-        @*<RadzenDataGridColumn TItem="User" Property="PhoneNumber" Title="Phone" Width="160px"/>
-        <RadzenDataGridColumn TItem="User" Property="IsAuthenticated" Title="Verified Email" Width="140px">
-            <Template Context="user">
-                <RadzenText Text="@(user.IsAuthenticated == true ? "Yes" : "No")"></RadzenText>
-            </Template>
-        </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="User" Property="Role" Title="Role" Width="100px" />
-        <RadzenDataGridColumn TItem="User" Property="UserPTO.Pto" Title="PTO" Width="80px">
-            <Template Context="user">
-                <RadzenText>@user.UserPTO.Pto</RadzenText>
-            </Template>
-        </RadzenDataGridColumn>*@
+        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Pto" Title="현재 PTO" Width="100px" />
+        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="CreatedDate" Title="신청한 날짜" Width="120px" FormatString="{0:d}" />
         <RadzenDataGridColumn TItem="VerifyUserPTO" Property="" Title="Result" Width="160px" Filterable="false" TextAlign="TextAlign.Center">
             <Template Context="verifyUserPTO">
                 <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Radzen.Variant.Flat" Shade="Shade.Lighter" Icon="check_circle_outline" Text="Accept" Click=@(() => UpdatePTOStatus(verifyUserPTO.Id, true)) />

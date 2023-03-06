@@ -35,17 +35,17 @@
             </Template>
         </RadzenDataGridColumn>
         <RadzenDataGridColumn TItem="User" Property="Email" Title="Email" Width="180px" />
-        <RadzenDataGridColumn TItem="User" Property="StartWorkDate" Title="Start Date" FormatString="{0:d}" Width="160px" />
+        <RadzenDataGridColumn TItem="User" Property="StartWorkDate" Title="입사일" FormatString="{0:d}" Width="160px" />
         <RadzenDataGridColumn TItem="User" Property="PhoneNumber" Title="Phone" Width="160px" />
-        <RadzenDataGridColumn TItem="User" Property="IsAuthenticated" Title="Verified Email" Width="140px">
-            <Template Context="user">
-                <RadzenText Text="@(user.IsAuthenticated == true ? "Yes" : "No")"></RadzenText>
-            </Template>
-        </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="User" Property="Role" Title="Role" Width="100px" />
         <RadzenDataGridColumn TItem="User" Property="UserPTO.Pto" Title="PTO" Width="80px">
             <Template Context="user">
                 <RadzenText>@user.UserPTO.Pto</RadzenText>
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="User" Property="Role" Title="Role" Width="100px" />
+        <RadzenDataGridColumn TItem="User" Property="IsAuthenticated" Title="Verify Email" Width="140px">
+            <Template Context="user">
+                <RadzenText Text="@(user.IsAuthenticated == true ? "Yes" : "No")"></RadzenText>
             </Template>
         </RadzenDataGridColumn>
     </Columns>

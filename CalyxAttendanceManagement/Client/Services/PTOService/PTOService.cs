@@ -39,4 +39,18 @@ public class PTOService : IPTOService
 
         return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
     }
+
+    //public async Task ClearUserRequestPTO()
+    //{
+    //    var resetModel = new UserRequestPTO()
+    //    {
+    //        CurrentPTOCount = UserPTOCount,
+    //        NeedPTOCount = 0.00M,
+    //        CalculatedPTOCount = UserPTOCount
+    //    };
+
+    //    UserRequestPTO = resetModel;
+
+    //    OnChange.Invoke();
+    //}
 }

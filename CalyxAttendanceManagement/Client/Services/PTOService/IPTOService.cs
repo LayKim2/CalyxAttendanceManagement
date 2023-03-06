@@ -12,4 +12,6 @@ public interface IPTOService
 
     Task GetPTOCount();
     Task<ServiceResponse<bool>> RequestPTO(UserRequestPTO request);
+
+    //Task ClearUserRequestPTO();
 }

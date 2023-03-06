@@ -9,7 +9,7 @@ public class UserRequestPTO
     public DateTime? StartDate { get; set; } = DateTime.Now;
     public DateTime? EndDate { get; set; }
     public decimal? CurrentPTOCount { get; set; }
-    public decimal? NeedPTOCount { get; set; } = 0;
+    public decimal? NeedPTOCount { get; set; }
     public decimal? CalculatedPTOCount { get; set; }
     public string Comment { get; set; } = string.Empty;
 }

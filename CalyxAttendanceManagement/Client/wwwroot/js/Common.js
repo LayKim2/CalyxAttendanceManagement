@@ -1,6 +1,5 @@
 ﻿
 
 function RemoveNumericIcon() {
-    $('.rz-button').css('display', 'none');
-
+    $('.rz-spinner-button').css('display', 'none');
 }

@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-md-4">
                             <RadzenDropDown @bind-Value=@PTOService.UserRequestPTO.PTOType Name="ptoType" Data=@ptoTypes Change="@ChangeDateToggle" style="width: 100%;" />
-                            <RadzenRequiredValidator Component="ptoType" Text="PTO type is required" Style="position: absolute" />
+                            <RadzenRequiredValidator Component="ptoType" Text="PTO type is required" />
                         </div>
                         <div class="col-md-6" />
                     </div><br/>
@@ -31,7 +31,7 @@
                             <RadzenDatePicker TItem="datetime?" Name="endDate" @bind-Value=@PTOService.UserRequestPTO.EndDate InitialViewDate=@(DateTime.Now) DateFormat="MM/dd/yyyy" Visible="!isHidden" Min="@PTOService.UserRequestPTO.StartDate" Change="CalculateNeedPTO" style="width: 100%;" />
                             @if (PTOService.UserRequestPTO.PTOType == "1일 이상")
                             {
-                                <RadzenRequiredValidator Component="endDate" Text="End date is required" Style="position: absolute" />
+                                <RadzenRequiredValidator Component="endDate" Text="End date is required" />
                             }
 
                         </div>
@@ -42,7 +42,6 @@
                             <RadzenLabel Text="현재 PTO" />
                         </div>
                         <div class="col-md-2">
-                            @*<RadzenText ></RadzenText>*@
                             <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.CurrentPTOCount" Name="CurrentPTOCount" ReadOnly Disabled Style="" />
                         </div>
                     </div><br/>
@@ -107,10 +106,12 @@
     protected override async Task OnParametersSetAsync()
     {
         PTOService.UserRequestPTO.CurrentPTOCount = PTOCount;
-
+        PTOService.UserRequestPTO.NeedPTOCount = 0.00M;
+        PTOService.UserRequestPTO.CalculatedPTOCount = PTOCount;
+        
         JSRuntime.InvokeVoidAsync("RemoveNumericIcon");
     }
-
+    
     IList<string> ptoTypes = new List<string>()
     {
         "1일 이상",
@@ -127,7 +128,9 @@
     {
         PTOService.UserRequestPTO = new UserRequestPTO()
             {
-                CurrentPTOCount = PTOCount
+                CurrentPTOCount = PTOCount,
+                NeedPTOCount = 0.00M,
+                CalculatedPTOCount = PTOCount
             };
     }
 
@@ -186,7 +189,7 @@
         }
         else
         {
-            ClearForm();
+            //await PTOService.ClearUserRequestPTO();
 
             Snackbar.Clear();
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
