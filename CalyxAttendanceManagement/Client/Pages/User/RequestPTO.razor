@@ -1,6 +1,7 @@
 ﻿@attribute [Authorize]
 @inject IPTOService PTOService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
 
 <RadzenTemplateForm TItem="CalyxAttendanceManagement.Shared.ViewModel.UserRequestPTO" Data="@PTOService.UserRequestPTO" Submit="SubmitPTO">
     <DataAnnotationsValidator />
@@ -17,7 +18,8 @@
                             <RadzenRequiredValidator Component="ptoType" Text="PTO type is required" Style="position: absolute" />
                         </div>
                         <div class="col-md-6" />
-                    </div>
+                    </div><br/>
+                    
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
                             <RadzenLabel Text="PTO 신청일" />
@@ -33,7 +35,7 @@
                             }
 
                         </div>
-                    </div>
+                    </div><br/>
 
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
@@ -43,7 +45,7 @@
                             @*<RadzenText ></RadzenText>*@
                             <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.CurrentPTOCount" Name="CurrentPTOCount" ReadOnly Disabled Style="" />
                         </div>
-                    </div>
+                    </div><br/>
 
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
@@ -52,7 +54,7 @@
                         <div class="col-md-2">
                             <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.NeedPTOCount" Name="CurrentPTOCount" ReadOnly Disabled />
                         </div>
-                    </div>
+                    </div><br/>
 
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
@@ -61,7 +63,7 @@
                         <div class="col-md-2">
                             <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.CalculatedPTOCount" Name="CurrentPTOCount" ReadOnly Disabled />
                         </div>
-                    </div>
+                    </div><br/>
 
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
@@ -105,6 +107,8 @@
     protected override async Task OnParametersSetAsync()
     {
         PTOService.UserRequestPTO.CurrentPTOCount = PTOCount;
+
+        JSRuntime.InvokeVoidAsync("RemoveNumericIcon");
     }
 
     IList<string> ptoTypes = new List<string>()
