@@ -5,6 +5,9 @@
 @inject Radzen.DialogService RadZenDialogService
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JSRuntime
+
+@using System.Security.Claims
 
 <div class="col-12 d-flex p-3" style="justify-content: center; margin-top:150px;">
     <RadzenCard class="d-flex m-5 p-0 rz-border-radius-6 rz-shadow-10" Style="width: 50%; flex-flow: row wrap; overflow: hidden; align-items: stretch;">
@@ -122,7 +125,11 @@
             errorMessage = string.Empty;
 
             await LocalStorage.SetItemAsync("authToken", result.Data);
-            await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+            var name = (await AuthenticationStateProvider.GetAuthenticationStateAsync())
+            .User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+
+            JSRuntime.InvokeVoidAsync("DisplayUserName", name);
 
             NavigationManager.NavigateTo("home");
         }
