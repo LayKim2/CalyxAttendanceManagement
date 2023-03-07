@@ -2,6 +2,9 @@
 @inject IPTOService PTOService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
 
 <RadzenTemplateForm TItem="CalyxAttendanceManagement.Shared.ViewModel.UserRequestPTO" Data="@PTOService.UserRequestPTO" Submit="SubmitPTO">
     <DataAnnotationsValidator />
@@ -18,8 +21,8 @@
                             <RadzenRequiredValidator Component="ptoType" Text="PTO type is required" />
                         </div>
                         <div class="col-md-6" />
-                    </div><br/>
-                    
+                    </div><br />
+
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
                             <RadzenLabel Text="PTO 신청일" />
@@ -35,7 +38,7 @@
                             }
 
                         </div>
-                    </div><br/>
+                    </div><br />
 
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
@@ -44,7 +47,7 @@
                         <div class="col-md-2">
                             <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.CurrentPTOCount" Name="CurrentPTOCount" ReadOnly Disabled />
                         </div>
-                    </div><br/>
+                    </div><br />
 
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
@@ -53,7 +56,7 @@
                         <div class="col-md-2">
                             <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.NeedPTOCount" Name="CurrentPTOCount" ReadOnly Disabled />
                         </div>
-                    </div><br/>
+                    </div><br />
 
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
@@ -62,7 +65,7 @@
                         <div class="col-md-2">
                             <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.CalculatedPTOCount" Name="CurrentPTOCount" ReadOnly Disabled />
                         </div>
-                    </div><br/>
+                    </div><br />
 
                     <div class="row">
                         <div class="col-md-2 align-items-center d-flex">
@@ -102,16 +105,22 @@
     public decimal PTOCount { get; set; }
 
     private bool isHidden = true;
+    private bool isAuthenticated = false;
 
     protected override async Task OnParametersSetAsync()
     {
         PTOService.UserRequestPTO.CurrentPTOCount = PTOCount;
         PTOService.UserRequestPTO.NeedPTOCount = 0.00M;
         PTOService.UserRequestPTO.CalculatedPTOCount = PTOCount;
-        
+
         JSRuntime.InvokeVoidAsync("RemoveNumericIcon");
     }
-    
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    await CheckAuth();
+    //}
+
     IList<string> ptoTypes = new List<string>()
     {
         "1일 이상",
@@ -181,22 +190,38 @@
 
     async Task SubmitPTO()
     {
-        var result = await PTOService.RequestPTO(PTOService.UserRequestPTO);
+        await CheckAuth();
 
-        if (!result.Success)
+        if (isAuthenticated)
         {
-            Snackbar.Clear();
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-            Snackbar.Add(result.Message, MudBlazor.Severity.Error);
+            var result = await PTOService.RequestPTO(PTOService.UserRequestPTO);
 
+            if (!result.Success)
+            {
+                Snackbar.Clear();
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                Snackbar.Add(result.Message, MudBlazor.Severity.Error);
+
+            }
+            else
+            {
+                Snackbar.Clear();
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                Snackbar.Add("PTO is requested.", MudBlazor.Severity.Success);
+
+                ClearForm();
+            }
         }
-        else
-        {
-            Snackbar.Clear();
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-            Snackbar.Add("PTO is requested.", MudBlazor.Severity.Success);
 
-            ClearForm();
+    }
+
+    private async Task CheckAuth()
+    {
+        isAuthenticated = await AuthService.IsUserAuthenticated();
+
+        if (!isAuthenticated)
+        {
+            NavigationManager.NavigateTo("login");
         }
     }
 

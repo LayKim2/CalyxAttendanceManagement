@@ -1,7 +1,10 @@
 ﻿@attribute [Authorize(Roles = "Admin")]
 
+@using System.Security.Claims
+
 @inject AuthenticationStateProvider AuthStateProvider
 @inject IAuthService AuthService
+@inject NavigationManager NavigationManager
 @inject ISnackbar Snackbar
 
 @implements IDisposable
@@ -22,8 +25,8 @@
                 <RadzenText TextStyle="TextStyle.Caption">@verifyUserPTO.Belong</RadzenText>
             </Template>
         </RadzenDataGridColumn>
-        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Date" Title="PTO Date" Width="160px" FormatString="{0:d}"/>
-        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="PTOType" Title="PTO Type" Width="120px" TextAlign="TextAlign.Center"/>
+        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Date" Title="PTO Date" Width="160px" FormatString="{0:d}" />
+        <RadzenDataGridColumn TItem="VerifyUserPTO" Property="PTOType" Title="PTO Type" Width="120px" TextAlign="TextAlign.Center" />
         <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Comment" Title="Comment" Width="160px" />
         <RadzenDataGridColumn TItem="VerifyUserPTO" Property="Pto" Title="현재 PTO" Width="100px" />
         <RadzenDataGridColumn TItem="VerifyUserPTO" Property="CreatedDate" Title="신청한 날짜" Width="120px" FormatString="{0:d}" />
@@ -39,6 +42,7 @@
 
 @code {
     bool isLoading = false;
+    private bool isAuthenticated = false;
     UpdateUserPTO updateUserPTO = new UpdateUserPTO();
 
     protected override async Task OnInitializedAsync()
@@ -47,9 +51,14 @@
 
         await base.OnInitializedAsync();
 
-        await AuthService.GetVerifyPTOs();
+        await CheckAuth();
 
-        AuthService.OnChange += StateHasChanged;
+        if (isAuthenticated)
+        {
+            await AuthService.GetVerifyPTOs();
+
+            AuthService.OnChange += StateHasChanged;
+        }
 
         isLoading = false;
     }
@@ -61,27 +70,52 @@
 
     async Task UpdatePTOStatus(int historyId, bool isAccept)
     {
-        updateUserPTO.UserPTOHistoryId = historyId;
-        updateUserPTO.Result = isAccept;
+        await CheckAuth();
 
-        var result = await AuthService.UpdateVerifyPTO(updateUserPTO);
-
-        if (!result.Success)
+        if (isAuthenticated)
         {
-            Snackbar.Clear();
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-            Snackbar.Configuration.SnackbarVariant = MudBlazor.Variant.Outlined;
-            Snackbar.Add(result.Message, MudBlazor.Severity.Error);
+            updateUserPTO.UserPTOHistoryId = historyId;
+            updateUserPTO.Result = isAccept;
 
+            var result = await AuthService.UpdateVerifyPTO(updateUserPTO);
+
+            if (!result.Success)
+            {
+                Snackbar.Clear();
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                Snackbar.Configuration.SnackbarVariant = MudBlazor.Variant.Outlined;
+                Snackbar.Add(result.Message, MudBlazor.Severity.Error);
+
+            }
+            else
+            {
+                Snackbar.Clear();
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                Snackbar.Configuration.SnackbarVariant = MudBlazor.Variant.Outlined;
+                Snackbar.Add("PTO status is updated.", MudBlazor.Severity.Success);
+            }
+
+            updateUserPTO = new UpdateUserPTO();
+        }
+    }
+
+    private async Task CheckAuth()
+    {
+        isAuthenticated = await AuthService.IsUserAuthenticated();
+
+        if (!isAuthenticated)
+        {
+            NavigationManager.NavigateTo("login");
         }
         else
         {
-            Snackbar.Clear();
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-            Snackbar.Configuration.SnackbarVariant = MudBlazor.Variant.Outlined;
-            Snackbar.Add("PTO status is updated.", MudBlazor.Severity.Success);
-        }
+            string role = (await AuthStateProvider.GetAuthenticationStateAsync())
+                    .User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
 
-        updateUserPTO = new UpdateUserPTO();
+            if (!role.Contains("Admin"))
+            {
+                NavigationManager.NavigateTo("login");
+            }
+        }
     }
 }
