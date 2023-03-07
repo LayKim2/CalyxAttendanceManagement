@@ -115,35 +115,6 @@
 </div>
 
 
-@*<EditForm Model="user" OnValidSubmit="HandleRegistraion">
-    <DataAnnotationsValidator />
-    <MudItem xs="12" sm="10">
-        <MudCardContent>
-            <MudTextField Label="First Name"
-                          @bind-Value="user.FirstName" For="@(() => user.FirstName)" />
-            <MudTextField Label="Last Name"
-                          @bind-Value="user.LastName" For="@(() => user.LastName)" />
-            <MudTextField Label="Email" Class="mt-3"
-                          @bind-Value="user.Email" For="@(() => user.Email)" />
-            <MudSelect Margin="Margin.Dense" T="string" @bind-Value="user.Belong" Label="Belong" AnchorOrigin="Origin.BottomCenter">
-                <MudSelectItem Value="@("Zip")" />
-                <MudSelectItem Value="@("Path")" />
-                <MudSelectItem Value="@("QA")" />
-            </MudSelect>
-            <MudDatePicker Label="입사일" Class="mt-3"
-                           @bind-Date="user.StartWorkDate" For="@(() => user.StartWorkDate)" />
-            <MudTextField Label="Password" Class="mt-5"
-                          @bind-Value="user.Password" For="@(() => user.Password)" InputType="InputType.Password" />
-            <MudTextField Label="Password" Class="mt-3"
-                          @bind-Value="user.ConfirmPassword" For="@(() => user.ConfirmPassword)" InputType="InputType.Password" />
-        </MudCardContent>
-        <br />
-        <MudCardActions>
-            <MudButton Variant="MudBlazor.Variant.Outlined" Color="Color.Primary" Class="ml-auto" ButtonType="MudBlazor.ButtonType.Submit">Register</MudButton>
-        </MudCardActions>
-    </MudItem>
-</EditForm>*@
-
 @code {
     DateTime? date = DateTime.Today;
     UserRegister user = new();
@@ -195,6 +166,8 @@
         if (result.Success)
         {
             DialogService.Close();
+
+            await NavigateToLogin();
         }
 
     }
