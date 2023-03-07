@@ -72,13 +72,16 @@
                 VerifyUserPTOs = response.Data;
         }
 
-        public async Task UpdateVerifyPTO(UpdateUserPTO request)
+        public async Task<ServiceResponse<bool>> UpdateVerifyPTO(UpdateUserPTO request)
         {
-            var response = await _http.PostAsJsonAsync("api/auth/update-verify-pto", request);
+            var result = await _http.PostAsJsonAsync("api/auth/update-verify-pto", request);
 
             await GetVerifyPTOs();
 
             OnChange.Invoke();
+
+            return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
+
         }
 
 

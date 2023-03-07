@@ -1,6 +1,9 @@
 ﻿@attribute [Authorize(Roles = "Admin")]
+
 @inject AuthenticationStateProvider AuthStateProvider
 @inject IAuthService AuthService
+@inject ISnackbar Snackbar
+
 @implements IDisposable
 
 
@@ -61,7 +64,23 @@
         updateUserPTO.UserPTOHistoryId = historyId;
         updateUserPTO.Result = isAccept;
 
-        await AuthService.UpdateVerifyPTO(updateUserPTO);
+        var result = await AuthService.UpdateVerifyPTO(updateUserPTO);
+
+        if (!result.Success)
+        {
+            Snackbar.Clear();
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+            Snackbar.Configuration.SnackbarVariant = MudBlazor.Variant.Outlined;
+            Snackbar.Add(result.Message, MudBlazor.Severity.Error);
+
+        }
+        else
+        {
+            Snackbar.Clear();
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+            Snackbar.Configuration.SnackbarVariant = MudBlazor.Variant.Outlined;
+            Snackbar.Add("PTO status is updated.", MudBlazor.Severity.Success);
+        }
 
         updateUserPTO = new UpdateUserPTO();
     }

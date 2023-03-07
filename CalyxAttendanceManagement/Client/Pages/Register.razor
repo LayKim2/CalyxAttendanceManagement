@@ -105,7 +105,7 @@
                 <div class="row col-md-12 justify-content-center" sstyle="margin">
                     <div class="col-md-12 d-flex align-items-end justify-content-center" style="margin-top:30px; margin-bottom:30px;">
                         <RadzenButton Shade="Radzen.Shade.Lighter" ButtonStyle="ButtonStyle.Light" style="display: inline-block; margin-right:50px;" Text="Back" Click="NavigateToLogin" />
-                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Shade="Shade.Darker" ButtonStyle="ButtonStyle.Info" Text="Sing up" />
+                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Shade="Shade.Darker" ButtonStyle="ButtonStyle.Info" Text="Sign up" />
                     </div>
                 </div>
 
@@ -114,6 +114,9 @@
     </RadzenCard>
 </div>
 
+<div class="col-12 d-flex p-3" style="justify-content: center;">
+    ©Calyx Technology, Inc. All rights reserved.
+</div>
 
 @code {
     DateTime? date = DateTime.Today;
@@ -165,8 +168,6 @@
 
         if (result.Success)
         {
-            DialogService.Close();
-
             await NavigateToLogin();
         }
 

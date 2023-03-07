@@ -42,7 +42,7 @@
                             <RadzenLabel Text="현재 PTO" />
                         </div>
                         <div class="col-md-2">
-                            <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.CurrentPTOCount" Name="CurrentPTOCount" ReadOnly Disabled Style="" />
+                            <RadzenNumeric TItem="decimal?" @bind-Value="@PTOService.UserRequestPTO.CurrentPTOCount" Name="CurrentPTOCount" ReadOnly Disabled />
                         </div>
                     </div><br/>
 
@@ -90,7 +90,7 @@
         </div>
         <div class="row col-md-6 justify-content-center">
             <div class="col-md-6 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
-                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Request" />
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Shade="Shade.Darker" ButtonStyle="ButtonStyle.Info" Text="Request" />
                 <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Clear" Click="@ClearForm" />
             </div>
         </div>
@@ -124,7 +124,7 @@
         "4반반차(15:00 ~ 17:00)"
     };
 
-    void ClearForm()
+    async Task ClearForm()
     {
         PTOService.UserRequestPTO = new UserRequestPTO()
             {
@@ -132,6 +132,8 @@
                 NeedPTOCount = 0.00M,
                 CalculatedPTOCount = PTOCount
             };
+
+        await JSRuntime.InvokeVoidAsync("RemoveNumericIcon");
     }
 
     void ChangeDateToggle()
@@ -186,25 +188,16 @@
             Snackbar.Clear();
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
             Snackbar.Add(result.Message, MudBlazor.Severity.Error);
+
         }
         else
         {
-            //await PTOService.ClearUserRequestPTO();
-
             Snackbar.Clear();
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
             Snackbar.Add("PTO is requested.", MudBlazor.Severity.Success);
+
+            ClearForm();
         }
     }
 
-    //List<CommonCode> ptoTypes = new List<CommonCode>()
-    //{
-    //    new CommonCode() { Id = 1, Category = "PTOType", Name = "1일" },
-    //    new CommonCode() { Id = 2, Category = "PTOType", Name = "오전반차" },
-    //    new CommonCode() { Id = 2, Category = "PTOType", Name = "오후반차" },
-    //    new CommonCode() { Id = 2, Category = "PTOType", Name = "1반반차(08:00 ~ 10:00)" },
-    //    new CommonCode() { Id = 2, Category = "PTOType", Name = "2반반차(10:00 ~ 11:30)" },
-    //    new CommonCode() { Id = 2, Category = "PTOType", Name = "3반반차(13:00 ~ 15:00)" },
-    //    new CommonCode() { Id = 2, Category = "PTOType", Name = "4반반차(15:00 ~ 17:00)" }
-    //};
 }

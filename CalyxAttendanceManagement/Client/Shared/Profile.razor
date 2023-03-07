@@ -12,16 +12,8 @@
             <MudCardContent>
                 <div class="d-flex justify-center mb-4">
                     <MudAvatar Color="Color.Secondary" Style="height:250px; width:250px;">@FirstLetterOfName</MudAvatar>
-                    @*@if (!string.IsNullOrEmpty(ProfileModel.UserImage))
-                    {
-                    <MudAvatar Image="@ProfileModel.UserImage" Style="height:250px; width:250px;"> </MudAvatar>
-                    }
-                    else
-                    {
-                    <MudAvatar Color="Color.Secondary" Style="height:250px; width:250px;">@FirstLetterOfName</MudAvatar>
-                    }*@
                 </div>
-                <MudText Typo="Typo.h6" Align="Align.Center">@ProfileModel.UserName</MudText>
+                <MudText Typo="Typo.h6" Align="Align.Center">@ProfileModel.UserName ( @ProfileModel.Belong ) </MudText>
                 <MudText Align="Align.Center">@ProfileModel.Email</MudText>
             </MudCardContent>
             <MudCardActions Class="d-flex justify-center">
@@ -54,27 +46,30 @@
             <MudCard Elevation="25">
                 <MudCardHeader>
                     <CardHeaderContent>
-                        <MudText>Profile Details</MudText>
+                        <MudText>Details</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent>
                     <MudGrid>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="@ProfileModel.UserName" For="@(() => ProfileModel.UserName)" Label="Full Name" Variant="MudBlazor.Variant.Outlined" Disabled=true />
+                            <MudTextField @bind-Value="@ProfileModel.UserName" For="@(() => ProfileModel.UserName)" Label="Name" Variant="MudBlazor.Variant.Outlined" ReadOnly=true />
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="@ProfileModel.Email" For="@(() => ProfileModel.Email)" Label="Email" Variant="MudBlazor.Variant.Outlined" InputType="InputType.Email" Disabled=true />
+                            <MudTextField @bind-Value="@ProfileModel.Email" For="@(() => ProfileModel.Email)" Label="Email" Variant="MudBlazor.Variant.Outlined" InputType="InputType.Email" ReadOnly=true />
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudTextField @bind-Value="@ProfileModel.PhoneNumber" For="@(() => ProfileModel.PhoneNumber)" Placeholder="000-0000-0000" Mask="@(new PatternMask("000-0000-0000"))" Label="User PhoneNumber" Variant="MudBlazor.Variant.Outlined" />
+                            <MudTextField @bind-Value="@ProfileModel.Belong" For="@(() => ProfileModel.Belong)" Label="소속" Variant="MudBlazor.Variant.Outlined" ReadOnly=true />
                         </MudItem>
                         <MudItem xs="12" md="6">
-                            <MudDatePicker @bind-Date="@ProfileModel.StartWorkDate" For="@(() => ProfileModel.StartWorkDate)" Label="Start Date" Variant="MudBlazor.Variant.Outlined" Disabled=true />
+                            <MudDatePicker @bind-Date="@ProfileModel.StartWorkDate" For="@(() => ProfileModel.StartWorkDate)" Label="입사일" Variant="MudBlazor.Variant.Outlined" Disabled=true />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField @bind-Value="@ProfileModel.PhoneNumber" For="@(() => ProfileModel.PhoneNumber)" Placeholder="000-0000-0000" Mask="@(new PatternMask("000-0000-0000"))" Label="Phone" Variant="MudBlazor.Variant.Outlined" />
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>
                 <MudCardActions Class="pb-4 pl-4">
-                    <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Primary" Class="ml-auto" ButtonType="MudBlazor.ButtonType.Submit">Save Changes</MudButton>
+                    <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Info" Class="ml-auto" ButtonType="MudBlazor.ButtonType.Submit">Save Changes</MudButton>
                 </MudCardActions>
             </MudCard>
         </EditForm>
@@ -103,6 +98,7 @@
             ProfileModel.Email = user.Email;
             ProfileModel.PhoneNumber = user.PhoneNumber;
             ProfileModel.StartWorkDate = user.StartWorkDate;
+            ProfileModel.Belong = user.Belong;
             //ProfileModel.UserImage = user.ImageFileName;
 
             if (ProfileModel.UserName.Length > 0)
@@ -166,6 +162,7 @@
         {
             Snackbar.Clear();
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+            Snackbar.Configuration.SnackbarVariant = MudBlazor.Variant.Outlined;
             Snackbar.Add(result.Message, MudBlazor.Severity.Error);
         }
         else
@@ -179,6 +176,7 @@
             {
                 Snackbar.Clear();
                 Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                Snackbar.Configuration.SnackbarVariant = MudBlazor.Variant.Outlined;
                 Snackbar.Add("Profile has been changed.", MudBlazor.Severity.Success);
             }
 

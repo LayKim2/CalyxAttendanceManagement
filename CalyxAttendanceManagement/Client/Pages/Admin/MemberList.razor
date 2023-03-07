@@ -5,7 +5,7 @@
 
 
 <RadzenDataGrid AllowFiltering="true" IsLoading=@isLoading AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" FilterPopupRenderMode="PopupRenderMode.OnDemand" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Center" ShowPagingSummary="true"
-                Data="@AuthService.Users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" RowRender="@RowRender" ExpandMode="DataGridExpandMode.Single" RowExpand="RowExpand">
+                Data="@AuthService.Users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" ExpandMode="DataGridExpandMode.Single">
     <Template Context="user">
         <RadzenDataGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@user.UserPTO.UserPtoHistory" TItem="CalyxAttendanceManagement.Shared.Model.UserPTOHistory" PageSize="5">
             <Columns>
@@ -71,17 +71,5 @@
     public void Dispose()
     {
         AuthService.OnChange -= StateHasChanged;
-    }
-    void RowRender(RowRenderEventArgs<User> args)
-    {
-
-    }
-
-    void RowExpand()
-    {
-        //if (order.OrderDetails == null)
-        //{
-        //    order.OrderDetails = dbContext.OrderDetails.Include("Product").Where(o => o.OrderID == order.OrderID).ToList();
-        //}
     }
 }
