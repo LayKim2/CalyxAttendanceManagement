@@ -133,7 +133,7 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
             var token = new JwtSecurityToken(
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(30),
+                    expires: DateTime.Now.AddHours(9),
                     signingCredentials: creds
                 );
 
