@@ -19,9 +19,6 @@
             @*<MudImage Src="/images/ic-path.png"/>*@
         </RadzenCard>
         <RadzenCard Class="rz-shadow-0 rz-border-radius-0 p-4" style="flex: 1 14rem;">
-            @*<RadzenText TextStyle="TextStyle.H5" TagName="TagName.H2" Class="mb-4">
-            Calyx Attendance Management
-            </RadzenText>*@
             <EditForm Model="user" OnValidSubmit="HandleLogin">
                 <DataAnnotationsValidator />
                 <MudCardHeader>
@@ -48,27 +45,6 @@
                     <MudButton Variant="MudBlazor.Variant.Text" Class="ml-auto" @onclick="NavigateToRegister">Register as a new user</MudButton>
                 </MudCardActions>
             </EditForm>
-            @* <EditForm Model="user" OnValidSubmit="HandleLogin">
-            <DataAnnotationsValidator />
-            <div class="mb-3">
-            <label for="email">Email</label>
-            <InputText id="email" @bind-Value=user.Email class="form-control" />
-            <ValidationMessage For="@(() => user.Email)" />
-            </div>
-            <div class="mb-3">
-            <label for="password">Password</label>
-            <InputText id="password" @bind-Value=user.Password class="form-control" type="password" />
-            <ValidationMessage For="@(() => user.Password)" />
-            </div>
-            <div class="text-danger">
-            <span>@errorMessage</span>
-            </div>
-            <br />
-            <div>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <button type="button" class="btn btn-danger" @onclick="NavigateToRegister">Register</button>
-            </div>
-            </EditForm>*@
         </RadzenCard>
     </RadzenCard>
 </div>
@@ -136,7 +112,6 @@
         else
         {
             errorMessage = result.Message;
-            //await DialogService.Alert(result.Message, "Calyx", new AlertOptions() { OkButtonText = "Yes" });
 
             RadZenDialogService.Close();
         }
@@ -144,8 +119,10 @@
 
     private async Task NavigateToRegister()
     {
-        await RadZenDialogService.OpenAsync<Register>("Register", null,
-            new Radzen.DialogOptions() { Width = "450px", Height = "482px", Resizable = true, Draggable = true });
+        //await RadZenDialogService.OpenAsync<Register>("Register", null,
+        //    new Radzen.DialogOptions() { Width = "450px", Height = "482px", Resizable = true, Draggable = true });
+
+        NavigationManager.NavigateTo("register");
     }
 
 }

@@ -1,6 +1,97 @@
-﻿@inject IAuthService AuthService
+﻿@page "/register"
+
+@inject IAuthService AuthService
 @inject Radzen.DialogService DialogService
 @inject NavigationManager NavigationManager
+
+
+@*<div class="col-12 d-flex p-3" style="justify-content: center; margin-top:150px;">
+    <RadzenCard class="d-flex m-5 p-0 rz-border-radius-6 rz-shadow-10" Style="width: 50%; flex-flow: row wrap; overflow: hidden; align-items: stretch;">
+
+        <RadzenTemplateForm TItem="User" Data="@PTOService.UserRequestPTO" Submit="SubmitPTO">
+            <DataAnnotationsValidator />
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <RadzenFieldset Text="Sign Up">
+
+                            <MudCardContent>
+                                <MudTextField Label="First Name"
+                                              @bind-Value="user.FirstName" For="@(() => user.FirstName)" />
+                                <MudTextField Label="Last Name"
+                                              @bind-Value="user.LastName" For="@(() => user.LastName)" />
+                                <MudTextField Label="Email" Class="mt-3"
+                                              @bind-Value="user.Email" For="@(() => user.Email)" />
+                                <MudSelect Margin="Margin.Dense" T="string" @bind-Value="user.Belong" Label="Belong" AnchorOrigin="Origin.BottomCenter">
+                                    <MudSelectItem Value="@("Zip")" />
+                                    <MudSelectItem Value="@("Path")" />
+                                    <MudSelectItem Value="@("QA")" />
+                                </MudSelect>
+                                <MudDatePicker Label="입사일" Class="mt-3"
+                                               @bind-Date="user.StartWorkDate" For="@(() => user.StartWorkDate)" />
+                                <MudTextField Label="Password" Class="mt-5"
+                                              @bind-Value="user.Password" For="@(() => user.Password)" InputType="InputType.Password" />
+                                <MudTextField Label="Password" Class="mt-3"
+                                              @bind-Value="user.ConfirmPassword" For="@(() => user.ConfirmPassword)" InputType="InputType.Password" />
+                            </MudCardContent>
+                            <br />
+                            <MudCardActions>
+                                <MudButton Variant="MudBlazor.Variant.Outlined" Color="Color.Primary" Class="ml-auto" ButtonType="MudBlazor.ButtonType.Submit">Register</MudButton>
+                            </MudCardActions>
+
+                            <div class="row">
+                                <div class="col-md-2 align-items-center d-flex">
+                                    <RadzenLabel Text="First Name" />
+                                </div>
+                                <div class="col-md-3">
+                                    <RadzenText TItem="string?" @bind-Value="@user.FirstName" Name="FirstName" />
+                                    <RadzenRequiredValidator Component="FirstName" Text="First name is required" />
+                                </div>
+                            </div><br />
+
+                            <div class="row">
+                                <div class="col-md-2 align-items-center d-flex">
+                                    <RadzenLabel Text="Last Name" />
+                                </div>
+                                <div class="col-md-3">
+                                    <RadzenText TItem="string?" @bind-Value="@user.LastName" Name="LastName" />
+                                    <RadzenRequiredValidator Component="LastName" Text="Last name is required" />
+                                </div>
+                            </div><br />
+
+                            <div class="row">
+                                <div class="col-md-2 align-items-center d-flex">
+                                    <RadzenLabel Text="Company Email" />
+                                </div>
+                                <div class="col-md-3">
+                                    <RadzenText TItem="string?" @bind-Value="@user.Email" Name="Email" />
+                                    <RadzenRequiredValidator Component="Email" Text="Email address must be from 'calyxsoftware.com'" />
+                                </div>
+                            </div><br />
+
+                            <div class="row">
+                                <div class="col-md-2 align-items-center d-flex">
+                                    <RadzenLabel Text="입사일" />
+                                </div>
+                                <div class="col-md-3">
+                                    <RadzenDatePicker TItem="datetime?" @bind-Value=@user.StartWorkDate DateFormat="MM/dd/yyyy" Max="DateTime.Today" style="width: 100%;" />
+                                </div>
+                            </div>
+
+
+                        </RadzenFieldset>
+                    </div>
+                </div>
+                <div class="row col-md-6 justify-content-center">
+                    <div class="col-md-6 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
+                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Request" />
+                    </div>
+                </div>
+            </div>
+        </RadzenTemplateForm>
+    </RadzenCard>
+</div>*@
+
 
 <EditForm Model="user" OnValidSubmit="HandleRegistraion">
     <DataAnnotationsValidator />
@@ -24,9 +115,9 @@
             <MudTextField Label="Password" Class="mt-3"
                           @bind-Value="user.ConfirmPassword" For="@(() => user.ConfirmPassword)" InputType="InputType.Password" />
         </MudCardContent>
-        <br/>
+        <br />
         <MudCardActions>
-            <MudButton Variant="MudBlazor.Variant.Outlined" Color="Color.Primary" Class="ml-auto"  ButtonType="MudBlazor.ButtonType.Submit">Register</MudButton>
+            <MudButton Variant="MudBlazor.Variant.Outlined" Color="Color.Primary" Class="ml-auto" ButtonType="MudBlazor.ButtonType.Submit">Register</MudButton>
         </MudCardActions>
     </MudItem>
 </EditForm>
