@@ -40,6 +40,7 @@
     <Using Include="CalyxAttendanceManagement.Client.Services.AuthService" />
     <Using Include="CalyxAttendanceManagement.Client.Services.CalendarService" />
     <Using Include="CalyxAttendanceManagement.Client.Services.PTOService" />
+    <Using Include="CalyxAttendanceManagement.Client.Services.OpenAIService" />
   </ItemGroup>
 
   <!--Nuget-->

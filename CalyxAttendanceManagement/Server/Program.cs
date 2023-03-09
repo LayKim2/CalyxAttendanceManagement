@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICalendarService, CalendarService>();
 builder.Services.AddScoped<IPTOService, PTOService>();
+builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 
 // auth (Middleware)
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
