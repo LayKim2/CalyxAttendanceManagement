@@ -80,6 +80,14 @@ namespace CalyxAttendanceManagement.Server.Services.AuthService
 
             _context.Users.Add(user);
 
+            UserPTO userPto = new UserPTO()
+            {
+                UserId = user.Id,
+                Pto = 0.00M,
+            };
+
+            _context.UserPTO.Add(userPto);
+
             await _context.SaveChangesAsync();
 
             await SendEmail(user);

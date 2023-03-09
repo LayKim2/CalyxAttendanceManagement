@@ -36,7 +36,6 @@
                             {
                                 <RadzenRequiredValidator Component="endDate" Text="End date is required" />
                             }
-
                         </div>
                     </div><br />
 
@@ -109,17 +108,20 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        PTOService.UserRequestPTO.CurrentPTOCount = PTOCount;
-        PTOService.UserRequestPTO.NeedPTOCount = 0.00M;
-        PTOService.UserRequestPTO.CalculatedPTOCount = PTOCount;
+        PTOService.UserRequestPTO = new UserRequestPTO()
+        {
+            CurrentPTOCount = PTOCount,
+            NeedPTOCount = 0.00M,
+            CalculatedPTOCount = PTOCount
+        };
 
         JSRuntime.InvokeVoidAsync("RemoveNumericIcon");
     }
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    await CheckAuth();
-    //}
+    protected override async Task OnInitializedAsync()
+    {
+        await CheckAuth();
+    }
 
     IList<string> ptoTypes = new List<string>()
     {
