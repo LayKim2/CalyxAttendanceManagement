@@ -1,4 +1,5 @@
 ﻿@page "/home"
+@using System.Web
 @inject IOpenAIService OpenAIService
 
 <h1>Welcome to calyx.</h1>
@@ -29,7 +30,7 @@
 
     async Task CallService()
     {
-        response = await OpenAIService.ResponseOpenAI(prompt);
+        response = await OpenAIService.ResponseOpenAI(HttpUtility.UrlPathEncode(prompt));
     }
     
 }
