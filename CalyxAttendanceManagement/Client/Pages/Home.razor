@@ -1,36 +1,4 @@
 ﻿@page "/home"
-@using System.Web
-@inject IOpenAIService OpenAIService
 
 <h1>Welcome to calyx.</h1>
-<br/>
 
-<PageTitle>Calyx Attendance Management</PageTitle>
-
-<MainTitle Title="OpenAI Service" />
-
-<input class="form-control" type="text"
-       @bind="prompt" />
-<br />
-
-<button class="btn btn-primary"
-        @onclick="CallService">
-    Call The Service
-</button>
-<br />
-<br />
-<h4>Response:</h4>
-<br />
-<p>@response</p>
-
-@code {
-    private string prompt = string.Empty;
-    private string response = string.Empty;
-
-
-    async Task CallService()
-    {
-        response = await OpenAIService.ResponseOpenAI(HttpUtility.UrlPathEncode(prompt));
-    }
-    
-}
