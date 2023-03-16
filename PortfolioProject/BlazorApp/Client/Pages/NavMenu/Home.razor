@@ -1,0 +1,55 @@
+﻿@page "/admin/home"
+@inject IJSRuntime JSRuntime
+@inject HttpClient Http
+
+<PageTitle>HIGHLIGHT</PageTitle>
+
+
+<div id="top" class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0">Home</h1>
+    <a href="/" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Portfolio</a>
+</div>
+<Radzen.Blazor.RadzenChart>
+    <Radzen.Blazor.RadzenLineSeries Smooth="true" Data="@forecasts" CategoryProperty="Date" Title="Temp. (C)"
+                                    LineType="Radzen.Blazor.LineType.Solid" ValueProperty="TemperatureC">
+                                    <RadzenMarkers MarkerType="MarkerType.Circle"/>
+    </Radzen.Blazor.RadzenLineSeries>
+    <Radzen.Blazor.RadzenLineSeries Smooth="true" Data="@forecasts" CategoryProperty="Date" Title="Temp. (F)"
+                                    LineType="Radzen.Blazor.LineType.Solid" ValueProperty="TemperatureF">
+        <RadzenMarkers MarkerType="MarkerType.Circle" />
+    </Radzen.Blazor.RadzenLineSeries>
+    <RadzenValueAxis>
+        <RadzenGridLines Visible="true"/>
+        <RadzenAxisTitle Text="Temperature"></RadzenAxisTitle>
+    </RadzenValueAxis>
+</Radzen.Blazor.RadzenChart>
+
+
+
+@code {
+
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        JSRuntime.InvokeVoidAsync("Expand");
+
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+    }
+
+    public class WeatherForecast
+    {
+        public DateTime Date { get; set; }
+
+        public int TemperatureC { get; set; }
+
+        public string? Summary { get; set; }
+
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+
+}
+
+

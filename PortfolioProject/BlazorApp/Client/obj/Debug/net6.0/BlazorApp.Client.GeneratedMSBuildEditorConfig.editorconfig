@@ -1,0 +1,165 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = BlazorApp.Client
+build_property.RootNamespace = BlazorApp.Client
+build_property.ProjectDir = C:\Users\2021c\Source\Repos\BlazorApp\BlazorApp\Client\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\2021c\Source\Repos\BlazorApp\BlazorApp\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Components/ApplyTo/AddApplyPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHBseVRvXEFkZEFwcGx5UGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Components/Schedule/AddAppointmentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTY2hlZHVsZVxBZGRBcHBvaW50bWVudFBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Components/Schedule/EditAppointmentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTY2hlZHVsZVxFZGl0QXBwb2ludG1lbnRQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Func/Javascript.razor]
+build_metadata.AdditionalFiles.TargetPath = RnVuY1xKYXZhc2NyaXB0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/NavMenu/ApplyTo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmF2TWVudVxBcHBseVRvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/NavMenu/Editor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmF2TWVudVxFZGl0b3IucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/NavMenu/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmF2TWVudVxIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/NavMenu/Schedule.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmF2TWVudVxTY2hlZHVsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/TempComponent/MudBlazor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVtcENvbXBvbmVudFxNdWRCbGF6b3IucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/TempComponent/UploadImage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVtcENvbXBvbmVudFxVcGxvYWRJbWFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/TempComponent/UploadVideo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVtcENvbXBvbmVudFxVcGxvYWRWaWRlby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/User/Account.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxBY2NvdW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/User/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxMb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/User/Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxQcm9maWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/User/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxSZWdpc3Rlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/User/Security.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxTZWN1cml0eS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Shared/Components/MainTitle.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcTWFpblRpdGxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Shared/Components/UserCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcVXNlckNhcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Shared/EmptyLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVtcHR5TGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Components/Portfolio/About.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQb3J0Zm9saW9cQWJvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-4ij9i1f0ia
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Components/Portfolio/Concept1.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQb3J0Zm9saW9cQ29uY2VwdDEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-o0tq6y2363
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Components/Portfolio/Concept2.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQb3J0Zm9saW9cQ29uY2VwdDIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-u0p32m3y6s
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Components/Portfolio/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQb3J0Zm9saW9cSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-48rtukgo5j
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Components/Portfolio/SideBar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQb3J0Zm9saW9cU2lkZUJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-trr3q2utr7
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-x8jq25t3t1
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/NavMenu/Portfolio.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmF2TWVudVxQb3J0Zm9saW8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-re99tn55yj
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/NavMenu/Setting.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmF2TWVudVxTZXR0aW5nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-ptnfgzn925
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Pages/UserPortfolio.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclBvcnRmb2xpby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-8al01lwli0
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-33op3vkbmc
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-2uyxcflnte
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Shared/NavMenu2.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-nrdyajvt28
+
+[C:/Users/2021c/Source/Repos/BlazorApp/BlazorApp/Client/Shared/UserButton.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFVzZXJCdXR0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ecycd2sftk

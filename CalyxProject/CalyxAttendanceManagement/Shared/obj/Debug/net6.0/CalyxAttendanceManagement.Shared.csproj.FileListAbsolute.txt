@@ -1,0 +1,12 @@
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\bin\Debug\net6.0\CalyxAttendanceManagement.Shared.deps.json
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\bin\Debug\net6.0\CalyxAttendanceManagement.Shared.dll
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\bin\Debug\net6.0\CalyxAttendanceManagement.Shared.pdb
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\CalyxAttendanceManagement.Shared.csproj.AssemblyReference.cache
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\CalyxAttendanceManagement.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\CalyxAttendanceManagement.Shared.AssemblyInfoInputs.cache
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\CalyxAttendanceManagement.Shared.AssemblyInfo.cs
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\CalyxAttendanceManagement.Shared.csproj.CoreCompileInputs.cache
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\CalyxAttendanceManagement.Shared.dll
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\refint\CalyxAttendanceManagement.Shared.dll
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\CalyxAttendanceManagement.Shared.pdb
+C:\Users\2021c\Desktop\Blazor\CalyxProject\CalyxAttendanceManagement\Shared\obj\Debug\net6.0\ref\CalyxAttendanceManagement.Shared.dll

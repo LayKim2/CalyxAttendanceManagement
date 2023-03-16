@@ -1,0 +1,63 @@
+﻿@inject IJSRuntime JSRuntime
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">HIGHLIGHT</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="admin" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="admin/portfolio" onclick="@Collapse">
+                <span class="oi oi-document" aria-hidden="true"></span> Portfolio
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="admin/applyto">
+                <span class="oi oi-spreadsheet" aria-hidden="true"></span> Apply to
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="admin/schedule">
+                <span class="oi oi-calendar" aria-hidden="true"></span> Schedule
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="admin/editor">
+                <span class="oi oi-eyedropper" aria-hidden="true"></span> Editor
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="admin/setting">
+                <span class="oi oi-info" aria-hidden="true"></span> Setting
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    //bool sidebar1Expanded = true;
+
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void Collapse()
+    {
+        JSRuntime.InvokeVoidAsync("Collapse");
+    }
+}

@@ -1,0 +1,337 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\WorkerService\\WorkerService.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Client\\CalyxAttendanceManagement.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Client\\CalyxAttendanceManagement.Client.csproj",
+        "projectName": "CalyxAttendanceManagement.Client",
+        "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Client\\CalyxAttendanceManagement.Client.csproj",
+        "packagesPath": "C:\\Users\\2021c\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\2021c\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj": {
+                "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Blazored.LocalStorage": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Microsoft.AspNetCore.Components.Authorization": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "MudBlazor": {
+              "target": "Package",
+              "version": "[6.1.8, )"
+            },
+            "Radzen.Blazor": {
+              "target": "Package",
+              "version": "[4.6.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[6.0.15, 6.0.15]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Server\\CalyxAttendanceManagement.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Server\\CalyxAttendanceManagement.Server.csproj",
+        "projectName": "CalyxAttendanceManagement.Server",
+        "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Server\\CalyxAttendanceManagement.Server.csproj",
+        "packagesPath": "C:\\Users\\2021c\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\2021c\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Client\\CalyxAttendanceManagement.Client.csproj": {
+                "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Client\\CalyxAttendanceManagement.Client.csproj"
+              },
+              "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj": {
+                "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "OpenAI.Net": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.28.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj",
+        "projectName": "CalyxAttendanceManagement.Shared",
+        "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj",
+        "packagesPath": "C:\\Users\\2021c\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\2021c\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\WorkerService\\WorkerService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\WorkerService\\WorkerService.csproj",
+        "projectName": "WorkerService",
+        "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\WorkerService\\WorkerService.csproj",
+        "packagesPath": "C:\\Users\\2021c\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\WorkerService\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\2021c\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Server\\CalyxAttendanceManagement.Server.csproj": {
+                "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Server\\CalyxAttendanceManagement.Server.csproj"
+              },
+              "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj": {
+                "projectPath": "C:\\Users\\2021c\\Desktop\\Dev\\Blazor\\CalyxProject\\CalyxAttendanceManagement\\Shared\\CalyxAttendanceManagement.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
